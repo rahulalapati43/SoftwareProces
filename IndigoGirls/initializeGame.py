@@ -17,11 +17,6 @@ def initializeGame(messageDictionary):
     #  outputDictionary.
     boardDictionary = {}
 
-    #Intializing the variable used in the program.
-    x = 0
-    y = 0
-    i = 0
-
     #Check if rowCount is specified by the user, else default it to 4.
     if "rowCount" not in messageDictionary.keys():
         messageDictionary["rowCount"] = 4

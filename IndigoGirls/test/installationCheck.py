@@ -8,6 +8,10 @@ validJson = ''
 validResult = dispatch.dispatch(validJson)
 print(("Input string:\t{0}\nOutput string:\t{1}\n").format(validJson, validResult))
 
+validJson = {}
+validResult = dispatch.dispatch(validJson)
+print(("Input string:\t{0}\nOutput string:\t{1}\n").format(validJson, validResult))
+
 validJson = '{}'
 validResult = dispatch.dispatch(validJson)
 print(("Input string:\t{0}\nOutput string:\t{1}\n").format(validJson, validResult))

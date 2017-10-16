@@ -33,6 +33,6 @@ def swipeGame(messageDictionary):
                 j = len(messageDictionary["board"]["grid"])
 
                 if (i != j):
-                    outputDictionary["gameStatus"] = "error: invalid grid length"
+                    outputDictionary["gameStatus"] = "error: invalid board"
 
     return outputDictionary

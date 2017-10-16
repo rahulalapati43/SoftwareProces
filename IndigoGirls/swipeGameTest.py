@@ -92,17 +92,32 @@ class SwipeGameTest(TestCase):
        #     outputDictionary = swipeGame(inputDictionary)
        #     self.assertEquals(resultDictionary,outputDictionary)
 
-       def test100_070_shouldValidateGridLength(self):
+       # def test100_070_shouldValidateGridLength(self):
+       #     inputDictionary = {}
+       #     inputDictionary["op"] = "swipe"
+       #     inputDictionary["direction"] = "left"
+       #     boardDictionary = {}
+       #     boardDictionary["rowCount"] = 4
+       #     boardDictionary["columnCount"] = 5
+       #     gridList = [0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0]
+       #     boardDictionary["grid"] = gridList
+       #     inputDictionary["board"] = boardDictionary
+       #     resultDictionary = {}
+       #     resultDictionary["gameStatus"] = "error: invalid board"
+       #     outputDictionary = swipeGame(inputDictionary)
+       #     self.assertEquals(resultDictionary,outputDictionary)
+
+       def test100_080_shouldValidateGridElements(self):
            inputDictionary = {}
            inputDictionary["op"] = "swipe"
            inputDictionary["direction"] = "left"
            boardDictionary = {}
            boardDictionary["rowCount"] = 4
-           boardDictionary["columnCount"] = 5
-           gridList = [0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0]
+           boardDictionary["columnCount"] = 4
+           gridList = [0,0,0,0,0,0,0,0,0,0,'A',0,0,0,1,0]
            boardDictionary["grid"] = gridList
            inputDictionary["board"] = boardDictionary
            resultDictionary = {}
-           resultDictionary["gameStatus"] = "error: invalid grid length"
+           resultDictionary["gameStatus"] = "error: invalid grid elements"
            outputDictionary = swipeGame(inputDictionary)
            self.assertEquals(resultDictionary,outputDictionary)

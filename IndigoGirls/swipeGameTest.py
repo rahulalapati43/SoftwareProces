@@ -31,6 +31,29 @@ class SwipeGameTest(TestCase):
        #     outputDictionary = swipeGame(inputDictionary)
        #     self.assertEquals(resultDictionary,outputDictionary)
 
+        # def test100_032_shouldValidatemissingrowCount(self):
+        #     inputDictionary = {}
+        #     inputDictionary["op"] = "swipe"
+        #     inputDictionary["direction"] = "left"
+        #     boardDictionary = {}
+        #     inputDictionary["board"] = boardDictionary
+        #     resultDictionary = {}
+        #     resultDictionary["gameStatus"] = "error: missing rowCount"
+        #     outputDictionary = swipeGame(inputDictionary)
+        #     self.assertEquals(resultDictionary,outputDictionary)
+        #
+        # def test100_034_shouldValidatemissingcolumnCount(self):
+        #     inputDictionary = {}
+        #     inputDictionary["op"] = "swipe"
+        #     inputDictionary["direction"] = "left"
+        #     boardDictionary = {}
+        #     boardDictionary["rowCount"] = 4
+        #     inputDictionary["board"] = boardDictionary
+        #     resultDictionary = {}
+        #     resultDictionary["gameStatus"] = "error: missing columnCount"
+        #     outputDictionary = swipeGame(inputDictionary)
+        #     self.assertEquals(resultDictionary, outputDictionary)
+
        # def test100_040_shouldValidaterowCountType(self):
        #     inputDictionary = {}
        #     inputDictionary["op"] = "swipe"
@@ -43,28 +66,43 @@ class SwipeGameTest(TestCase):
        #     outputDictionary = swipeGame(inputDictionary)
        #     self.assertEquals(resultDictionary,outputDictionary)
 
-       def test100_050_shouldValidatecolCount(self):
-           inputDictionary = {}
-           inputDictionary["op"] = "swipe"
-           inputDictionary["direction"] = "left"
-           boardDictionary = {}
-           boardDictionary["rowCount"] = 4
-           boardDictionary["columnCount"] = 1
-           inputDictionary["board"] = boardDictionary
-           resultDictionary = {}
-           resultDictionary["gameStatus"] = "error: columnCount is out of bounds"
-           outputDictionary = swipeGame(inputDictionary)
-           self.assertEquals(resultDictionary,outputDictionary)
+       # def test100_050_shouldValidatecolCount(self):
+       #     inputDictionary = {}
+       #     inputDictionary["op"] = "swipe"
+       #     inputDictionary["direction"] = "left"
+       #     boardDictionary = {}
+       #     boardDictionary["rowCount"] = 4
+       #     boardDictionary["columnCount"] = 1
+       #     inputDictionary["board"] = boardDictionary
+       #     resultDictionary = {}
+       #     resultDictionary["gameStatus"] = "error: columnCount is out of bounds"
+       #     outputDictionary = swipeGame(inputDictionary)
+       #     self.assertEquals(resultDictionary,outputDictionary)
+       #
+       # def test100_060_shouldValidatecolCountType(self):
+       #     inputDictionary = {}
+       #     inputDictionary["op"] = "swipe"
+       #     inputDictionary["direction"] = "left"
+       #     boardDictionary = {}
+       #     boardDictionary["rowCount"] = 4
+       #     boardDictionary["columnCount"] = "100"
+       #     inputDictionary["board"] = boardDictionary
+       #     resultDictionary = {}
+       #     resultDictionary["gameStatus"] = "error: columnCount is not an integer"
+       #     outputDictionary = swipeGame(inputDictionary)
+       #     self.assertEquals(resultDictionary,outputDictionary)
 
-       def test100_060_shouldValidatecolCountType(self):
+       def test100_070_shouldValidateGridLength(self):
            inputDictionary = {}
            inputDictionary["op"] = "swipe"
            inputDictionary["direction"] = "left"
            boardDictionary = {}
            boardDictionary["rowCount"] = 4
-           boardDictionary["columnCount"] = "100"
+           boardDictionary["columnCount"] = 5
+           gridList = [0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0]
+           boardDictionary["grid"] = gridList
            inputDictionary["board"] = boardDictionary
            resultDictionary = {}
-           resultDictionary["gameStatus"] = "error: columnCount is not an integer"
+           resultDictionary["gameStatus"] = "error: invalid grid length"
            outputDictionary = swipeGame(inputDictionary)
            self.assertEquals(resultDictionary,outputDictionary)

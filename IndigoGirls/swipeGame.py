@@ -6,16 +6,22 @@ def swipeGame(messageDictionary):
     elif (messageDictionary["direction"] != "up" and messageDictionary["direction"] != "down" and messageDictionary["direction"] != "left" and messageDictionary["direction"] != "right"):
         outputDictionary["gameStatus"] = "error: invalid direction"
 
-    if (isinstance(messageDictionary["board"]["rowCount"], int) == False):
-        outputDictionary["gameStatus"] = "error: rowCount is not an integer"
+    if "columnCount" not in messageDictionary["board"]:
+        outputDictionary["gameStatus"] = "error: missing columnCount"
 
-    elif (messageDictionary["board"]["rowCount"] <= 1 or messageDictionary["board"]["rowCount"] > 100):
-        outputDictionary["gameStatus"] = "error: rowCount is out of bounds"
-
-    if (isinstance(messageDictionary["board"]["columnCount"], int) == False):
+    elif (isinstance(messageDictionary["board"]["columnCount"], int) == False):
         outputDictionary["gameStatus"] = "error: columnCount is not an integer"
 
     elif (messageDictionary["board"]["columnCount"] <= 1 or messageDictionary["board"]["columnCount"] > 100):
         outputDictionary["gameStatus"] = "error: columnCount is out of bounds"
+
+    if "rowCount" not in messageDictionary["board"]:
+        outputDictionary["gameStatus"] = "error: missing rowCount"
+
+    elif (isinstance(messageDictionary["board"]["rowCount"], int) == False):
+        outputDictionary["gameStatus"] = "error: rowCount is not an integer"
+
+    elif (messageDictionary["board"]["rowCount"] <= 1 or messageDictionary["board"]["rowCount"] > 100):
+        outputDictionary["gameStatus"] = "error: rowCount is out of bounds"
 
     return outputDictionary

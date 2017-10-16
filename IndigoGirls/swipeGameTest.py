@@ -129,7 +129,7 @@ class SwipeGameTest(TestCase):
            boardDictionary = {}
            boardDictionary["rowCount"] = 4
            boardDictionary["columnCount"] = 4
-           gridList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0]
+           gridList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0]
            boardDictionary["grid"] = gridList
            inputDictionary["board"] = boardDictionary
            resultDictionary = {}

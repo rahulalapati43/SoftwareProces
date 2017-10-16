@@ -40,6 +40,9 @@ def swipeGame(messageDictionary):
                           if (isinstance(messageDictionary["board"]["grid"][index], int) == False):
                               outputDictionary["gameStatus"] = "error: invalid grid elements"
 
+                          elif (messageDictionary["board"]["grid"][index] < 0):
+                                outputDictionary["gameStatus"] = "error: Each item in the grid must be GE 0"
+
 
 
     return outputDictionary

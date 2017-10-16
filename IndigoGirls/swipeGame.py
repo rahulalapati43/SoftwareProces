@@ -35,4 +35,9 @@ def swipeGame(messageDictionary):
                 if (i != j):
                     outputDictionary["gameStatus"] = "error: invalid board"
 
+                elif (i == j):
+                      for index in range(0,i):
+                          if (isinstance(messageDictionary["board"]["grid"][index], int) == False):
+                              outputDictionary["gameStatus"] = "error: invalid grid elements"
+
     return outputDictionary

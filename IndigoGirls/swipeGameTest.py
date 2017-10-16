@@ -27,6 +27,6 @@ class SwipeGameTest(TestCase):
            boardDictionary["rowCount"] = 0
            inputDictionary["board"] = boardDictionary
            resultDictionary = {}
-           resultDictionary["gameStatus"] = "error: invalid row count"
+           resultDictionary["gameStatus"] = "error: rowCount is out of bounds"
            outputDictionary = swipeGame(inputDictionary)
            self.assertEquals(resultDictionary,outputDictionary)

@@ -12,4 +12,10 @@ def swipeGame(messageDictionary):
     elif (messageDictionary["board"]["rowCount"] <= 1 or messageDictionary["board"]["rowCount"] > 100):
         outputDictionary["gameStatus"] = "error: rowCount is out of bounds"
 
+    if (isinstance(messageDictionary["board"]["columnCount"], int) == False):
+        outputDictionary["gameStatus"] = "error: columnCount is not an integer"
+
+    elif (messageDictionary["board"]["columnCount"] <= 1 or messageDictionary["board"]["columnCount"] > 100):
+        outputDictionary["gameStatus"] = "error: columnCount is out of bounds"
+
     return outputDictionary

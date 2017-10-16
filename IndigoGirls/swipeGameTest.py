@@ -31,14 +31,40 @@ class SwipeGameTest(TestCase):
        #     outputDictionary = swipeGame(inputDictionary)
        #     self.assertEquals(resultDictionary,outputDictionary)
 
-       def test100_040_shouldValidaterowCountType(self):
+       # def test100_040_shouldValidaterowCountType(self):
+       #     inputDictionary = {}
+       #     inputDictionary["op"] = "swipe"
+       #     inputDictionary["direction"] = "left"
+       #     boardDictionary = {}
+       #     boardDictionary["rowCount"] = "1"
+       #     inputDictionary["board"] = boardDictionary
+       #     resultDictionary = {}
+       #     resultDictionary["gameStatus"] = "error: rowCount is not an integer"
+       #     outputDictionary = swipeGame(inputDictionary)
+       #     self.assertEquals(resultDictionary,outputDictionary)
+
+       def test100_050_shouldValidatecolCount(self):
            inputDictionary = {}
            inputDictionary["op"] = "swipe"
            inputDictionary["direction"] = "left"
            boardDictionary = {}
-           boardDictionary["rowCount"] = " "
+           boardDictionary["rowCount"] = 4
+           boardDictionary["columnCount"] = 1
            inputDictionary["board"] = boardDictionary
            resultDictionary = {}
-           resultDictionary["gameStatus"] = "error: rowCount is not an integer"
+           resultDictionary["gameStatus"] = "error: columnCount is out of bounds"
+           outputDictionary = swipeGame(inputDictionary)
+           self.assertEquals(resultDictionary,outputDictionary)
+
+       def test100_060_shouldValidatecolCountType(self):
+           inputDictionary = {}
+           inputDictionary["op"] = "swipe"
+           inputDictionary["direction"] = "left"
+           boardDictionary = {}
+           boardDictionary["rowCount"] = 4
+           boardDictionary["columnCount"] = "100"
+           inputDictionary["board"] = boardDictionary
+           resultDictionary = {}
+           resultDictionary["gameStatus"] = "error: columnCount is not an integer"
            outputDictionary = swipeGame(inputDictionary)
            self.assertEquals(resultDictionary,outputDictionary)

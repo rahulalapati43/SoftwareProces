@@ -24,4 +24,15 @@ def swipeGame(messageDictionary):
     elif (messageDictionary["board"]["rowCount"] <= 1 or messageDictionary["board"]["rowCount"] > 100):
         outputDictionary["gameStatus"] = "error: rowCount is out of bounds"
 
+    if ("rowCount" in messageDictionary["board"] and "columnCount" in messageDictionary["board"]):
+        if (messageDictionary["board"]["rowCount"] > 1 and messageDictionary["board"]["rowCount"] <= 100):
+            if (messageDictionary["board"]["columnCount"] > 1 and messageDictionary["board"]["columnCount"] <= 100):
+
+                i = messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]
+
+                j = len(messageDictionary["board"]["grid"])
+
+                if (i != j):
+                    outputDictionary["gameStatus"] = "error: invalid grid length"
+
     return outputDictionary

@@ -122,17 +122,32 @@ class SwipeGameTest(TestCase):
        #     outputDictionary = swipeGame(inputDictionary)
        #     self.assertEquals(resultDictionary,outputDictionary)
 
-       def test100_090_shouldValidateGridElementsforatleast2ormoreelementsgreaterthan0(self):
-           inputDictionary = {}
-           inputDictionary["op"] = "swipe"
-           inputDictionary["direction"] = "left"
-           boardDictionary = {}
-           boardDictionary["rowCount"] = 4
-           boardDictionary["columnCount"] = 4
-           gridList = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0]
-           boardDictionary["grid"] = gridList
-           inputDictionary["board"] = boardDictionary
-           resultDictionary = {}
-           resultDictionary["gameStatus"] = "error: Each item in the grid must be GE 0"
-           outputDictionary = swipeGame(inputDictionary)
-           self.assertEquals(resultDictionary,outputDictionary)
+       # def test100_090_shouldValidateGridElementsgreaterthan0(self):
+       #     inputDictionary = {}
+       #     inputDictionary["op"] = "swipe"
+       #     inputDictionary["direction"] = "left"
+       #     boardDictionary = {}
+       #     boardDictionary["rowCount"] = 4
+       #     boardDictionary["columnCount"] = 4
+       #     gridList = [0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0]
+       #     boardDictionary["grid"] = gridList
+       #     inputDictionary["board"] = boardDictionary
+       #     resultDictionary = {}
+       #     resultDictionary["gameStatus"] = "error: Each item in the grid must be GE 0"
+       #     outputDictionary = swipeGame(inputDictionary)
+       #     self.assertEquals(resultDictionary,outputDictionary)
+
+    def test100_095_shouldValidateatleast2GridElementsgreaterthan0(self):
+        inputDictionary = {}
+        inputDictionary["op"] = "swipe"
+        inputDictionary["direction"] = "left"
+        boardDictionary = {}
+        boardDictionary["rowCount"] = 4
+        boardDictionary["columnCount"] = 4
+        gridList = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
+        outputDictionary = swipeGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

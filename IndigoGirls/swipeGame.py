@@ -76,22 +76,26 @@ def swipeGame(messageDictionary):
                 outListIndex = inListIndex
                 previousElement = 0
                 for column in range(0, messageDictionary["board"]["columnCount"]):
+                    print messageDictionary["board"]["grid"][inListIndex]
                     if (messageDictionary["board"]["grid"][inListIndex] != 0):
                         if (previousElement == 0):
                             previousElement = messageDictionary["board"]["grid"][inListIndex]
+                            print previousElement
                         else:
                             if (previousElement == messageDictionary["board"]["grid"][inListIndex]):
                                 power = messageDictionary["board"]["grid"][inListIndex]
                                 sumElements = 2 * (2 ** power)
-                                outList[outListIndex] = math.log(sumElements, 2)
+                                outList[outListIndex] = int(math.log(sumElements, 2))
                                 outListIndex = outListIndex + 1
                                 previousElement = 0
                             else:
                                 outList[outListIndex] = previousElement
+                                print outList[outListIndex]
                                 outListIndex = outListIndex + 1
                                 previousElement = 0
                     inListIndex = inListIndex + 1
                 if previousElement != 0:
+                    print previousElement
                     outList[outListIndex] = previousElement
 
             compareResult = cmp(messageDictionary["board"]["grid"], outList)

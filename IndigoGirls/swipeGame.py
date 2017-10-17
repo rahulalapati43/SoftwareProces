@@ -1,4 +1,6 @@
 import math
+from random import *
+
 def swipeGame(messageDictionary):
     outputDictionary = {}
     outputDictionary["gameStatus"] = "underway"
@@ -59,6 +61,11 @@ def swipeGame(messageDictionary):
 
         x = len(messageDictionary["board"]["grid"])
 
+        randomList = [1, 1, 1, 2]
+        a = sample(randomList, 1)
+
+        position = randint(0, x - 1)
+
         sumElements = 0
 
         score = 0
@@ -99,6 +106,12 @@ def swipeGame(messageDictionary):
             compareResult = cmp(messageDictionary["board"]["grid"], outList)
 
             if (compareResult != 0):
+
+                while (outList[position] != 0):
+                    position = randint(0, x - 1)
+
+                outList[position] = a[0]
+
                 outputDictionary["score"] = sumElements
                 boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
                 boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
@@ -159,6 +172,11 @@ def swipeGame(messageDictionary):
 
             if (compareResult != 0):
 
+                while (outList[position] != 0):
+                    position = randint(0, x - 1)
+
+                outList[position] = a[0]
+
                 outputDictionary["score"] = score
 
                 boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
@@ -205,6 +223,12 @@ def swipeGame(messageDictionary):
             compareResult = cmp(messageDictionary["board"]["grid"], outList)
 
             if (compareResult != 0):
+
+                while (outList[position] != 0):
+                    position = randint(0, x - 1)
+
+                outList[position] = a[0]
+
                 outputDictionary["score"] = score
                 boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
                 boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
@@ -249,6 +273,12 @@ def swipeGame(messageDictionary):
             compareResult = cmp(messageDictionary["board"]["grid"], outList)
 
             if (compareResult != 0):
+
+                while (outList[position] != 0):
+                    position = randint(0, x - 1)
+
+                outList[position] = a[0]
+
                 outputDictionary["score"] = score
                 boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
                 boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]

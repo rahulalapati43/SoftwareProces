@@ -92,7 +92,7 @@ def swipeGame(messageDictionary):
                                 outList[outListIndex] = previousElement
                                 print outList[outListIndex]
                                 outListIndex = outListIndex + 1
-                                previousElement = 0
+                                previousElement = messageDictionary["board"]["grid"][inListIndex]
                     inListIndex = inListIndex + 1
                 if previousElement != 0:
                     print previousElement

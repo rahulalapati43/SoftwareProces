@@ -4,10 +4,11 @@ from random import *
 def swipeGame(messageDictionary):
     outputDictionary = {}
     outputDictionary["gameStatus"] = "underway"
+
     if "direction" not in messageDictionary.keys():
         outputDictionary["gameStatus"] = "error: missing direction"
 
-    elif (messageDictionary["direction"] != "up" and messageDictionary["direction"] != "down" and messageDictionary["direction"] != "left" and messageDictionary["direction"] != "right"):
+    elif (messageDictionary["direction"].lower() != "up" and messageDictionary["direction"].lower() != "down" and messageDictionary["direction"].lower() != "left" and messageDictionary["direction"].lower() != "right"):
         outputDictionary["gameStatus"] = "error: invalid direction"
 
     if "columnCount" not in messageDictionary["board"]:
@@ -76,7 +77,7 @@ def swipeGame(messageDictionary):
         for y in range(0, x):
             outList.append(0)
 
-        if (messageDictionary["direction"] == "left"):
+        if (messageDictionary["direction"].lower() == "left"):
 
             inListIndex = 0
 
@@ -112,7 +113,7 @@ def swipeGame(messageDictionary):
 
                 outList[position] = a[0]
 
-                outputDictionary["score"] = sumElements
+                outputDictionary["score"] = score
                 boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
                 boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
                 boardDictionary["grid"] = outList
@@ -121,7 +122,7 @@ def swipeGame(messageDictionary):
                 outputDictionary["gameStatus"] = "error: no tiles can be shifted"
 
 
-        elif (messageDictionary["direction"] == "right"):
+        elif (messageDictionary["direction"].lower() == "right"):
 
             for row in range(1, messageDictionary["board"]["rowCount"] + 1):
 
@@ -191,7 +192,7 @@ def swipeGame(messageDictionary):
 
                 outputDictionary["gameStatus"] = "error: no tiles can be shifted"
 
-        elif (messageDictionary["direction"] == "up"):
+        elif (messageDictionary["direction"].lower() == "up"):
 
             columnCount = messageDictionary["board"]["columnCount"]
 
@@ -237,7 +238,7 @@ def swipeGame(messageDictionary):
             elif (compareResult == 0):
                 outputDictionary["gameStatus"] = "error: no tiles can be shifted"
 
-        elif (messageDictionary["direction"] == "down"):
+        elif (messageDictionary["direction"].lower() == "down"):
 
             columnCount = messageDictionary["board"]["columnCount"]
             rowCount = messageDictionary["board"]["rowCount"]

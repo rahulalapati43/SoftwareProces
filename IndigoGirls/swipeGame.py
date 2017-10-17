@@ -213,4 +213,48 @@ def swipeGame(messageDictionary):
             elif (compareResult == 0):
                 outputDictionary["gameStatus"] = "error: no tiles can be shifted"
 
+        elif (messageDictionary["direction"] == "down"):
+
+            columnCount = messageDictionary["board"]["columnCount"]
+            rowCount = messageDictionary["board"]["rowCount"]
+
+            length = (len(messageDictionary["board"]["grid"]) - 1)
+
+            for column in range(0, columnCount):
+
+                outListIndex = inListIndex = length
+                previousElement = 0
+
+                for row in range(0, rowCount):
+                    if (messageDictionary["board"]["grid"][inListIndex] != 0):
+                        if (previousElement == 0):
+                            previousElement = messageDictionary["board"]["grid"][inListIndex]
+                        else:
+                            if (previousElement == messageDictionary["board"]["grid"][inListIndex]):
+                                power = messageDictionary["board"]["grid"][inListIndex]
+                                sumElements = 2 * (2 ** power)
+                                score = score + sumElements
+                                outList[outListIndex] = int(math.log(sumElements, 2))
+                                outListIndex = outListIndex - columnCount
+                                previousElement = 0
+                            else:
+                                outList[outListIndex] = previousElement
+                                outListIndex = outListIndex - columnCount
+                                previousElement = messageDictionary["board"]["grid"][inListIndex]
+                    inListIndex = inListIndex - columnCount
+                if previousElement != 0:
+                    outList[outListIndex] = previousElement
+                length = length - 1
+
+            compareResult = cmp(messageDictionary["board"]["grid"], outList)
+
+            if (compareResult != 0):
+                outputDictionary["score"] = score
+                boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
+                boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
+                boardDictionary["grid"] = outList
+                outputDictionary["board"] = boardDictionary
+            elif (compareResult == 0):
+                outputDictionary["gameStatus"] = "error: no tiles can be shifted"
+
     return outputDictionary

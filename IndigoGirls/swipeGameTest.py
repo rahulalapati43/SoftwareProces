@@ -137,17 +137,38 @@ class SwipeGameTest(TestCase):
        #     outputDictionary = swipeGame(inputDictionary)
        #     self.assertEquals(resultDictionary,outputDictionary)
 
-    def test100_095_shouldValidateatleast2GridElementsgreaterthan0(self):
+    # def test100_095_shouldValidateatleast2GridElementsgreaterthan0(self):
+    #     inputDictionary = {}
+    #     inputDictionary["op"] = "swipe"
+    #     inputDictionary["direction"] = "left"
+    #     boardDictionary = {}
+    #     boardDictionary["rowCount"] = 4
+    #     boardDictionary["columnCount"] = 4
+    #     gridList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+    #     boardDictionary["grid"] = gridList
+    #     inputDictionary["board"] = boardDictionary
+    #     resultDictionary = {}
+    #     resultDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
+    #     outputDictionary = swipeGame(inputDictionary)
+    #     self.assertEquals(resultDictionary, outputDictionary)
+
+    def test200_010_shouldSwipeLeft(self):
         inputDictionary = {}
         inputDictionary["op"] = "swipe"
         inputDictionary["direction"] = "left"
         boardDictionary = {}
         boardDictionary["rowCount"] = 4
         boardDictionary["columnCount"] = 4
-        gridList = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        gridList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0]
         boardDictionary["grid"] = gridList
         inputDictionary["board"] = boardDictionary
         resultDictionary = {}
-        resultDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
+        resultDictionary["score"] = 0
+        resboardDictionary = {}
+        resboardDictionary["columnCount"] = 4
+        resboardDictionary["rowCount"] = 4
+        resboardDictionary["grid"] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+        resultDictionary["board"] = resboardDictionary
+        resultDictionary["gameStatus"] = "underway"
         outputDictionary = swipeGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)

@@ -1,5 +1,7 @@
 import json
 from initializeGame import *
+from swipeGame import *
+
 def dispatch(messageJson=None):
     """
         dispatch is the microservice dispatcher for IndigoGirls, a 2048-like game.  It routes
@@ -43,6 +45,8 @@ def dispatch(messageJson=None):
     #  output of each function:  a dictionary containing name-value pairs to be encoded as a JSON string
     if(messageDictionary[u"op"] == u"initializeGame"):
         resultDictionary =   initializeGame(messageDictionary)
+    elif(messageDictionary[u"op"] == u"swipe"):
+        resultDictionary = swipeGame(messageDictionary)
     else:
         resultDictionary = buildErrorString('op is invalid')
 

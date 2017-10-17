@@ -1,5 +1,7 @@
+import math
 def swipeGame(messageDictionary):
     outputDictionary = {}
+    outputDictionary["gameStatus"] = "underway"
     if "direction" not in messageDictionary.keys():
         outputDictionary["gameStatus"] = "error: missing direction"
 
@@ -36,7 +38,6 @@ def swipeGame(messageDictionary):
                     outputDictionary["gameStatus"] = "error: invalid board"
 
                 elif (i == j):
-                    outputDictionary["gameStatus"] = " "
                     for index in range(0,i):
                         if (isinstance(messageDictionary["board"]["grid"][index], int) == False):
                             outputDictionary["gameStatus"] = "error: invalid grid elements"
@@ -53,5 +54,9 @@ def swipeGame(messageDictionary):
                                 count = count + 1
                         if count < 2:
                             outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
+
+    if (outputDictionary["gameStatus"] == "underway"):
+        if (messageDictionary["direction"] == "left"):
+            pass
 
     return outputDictionary

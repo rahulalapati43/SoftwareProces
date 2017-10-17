@@ -61,6 +61,8 @@ def swipeGame(messageDictionary):
 
         sumElements = 0
 
+        score = 0
+
         boardDictionary = {}
 
         outList = []
@@ -69,39 +71,74 @@ def swipeGame(messageDictionary):
 
         if (messageDictionary["direction"] == "left"):
 
-            inListIndex = outListIndex = 0
-            previousElement = 0
+            inListIndex = 0
 
             for row in range(0, messageDictionary["board"]["rowCount"]):
                 outListIndex = inListIndex
                 previousElement = 0
                 for column in range(0, messageDictionary["board"]["columnCount"]):
-                    print messageDictionary["board"]["grid"][inListIndex]
                     if (messageDictionary["board"]["grid"][inListIndex] != 0):
                         if (previousElement == 0):
                             previousElement = messageDictionary["board"]["grid"][inListIndex]
-                            print previousElement
                         else:
                             if (previousElement == messageDictionary["board"]["grid"][inListIndex]):
                                 power = messageDictionary["board"]["grid"][inListIndex]
                                 sumElements = 2 * (2 ** power)
+                                score = score + sumElements
                                 outList[outListIndex] = int(math.log(sumElements, 2))
                                 outListIndex = outListIndex + 1
                                 previousElement = 0
                             else:
                                 outList[outListIndex] = previousElement
-                                print outList[outListIndex]
                                 outListIndex = outListIndex + 1
                                 previousElement = messageDictionary["board"]["grid"][inListIndex]
                     inListIndex = inListIndex + 1
                 if previousElement != 0:
-                    print previousElement
                     outList[outListIndex] = previousElement
 
             compareResult = cmp(messageDictionary["board"]["grid"], outList)
 
             if (compareResult != 0):
                 outputDictionary["score"] = sumElements
+                boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
+                boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
+                boardDictionary["grid"] = outList
+                outputDictionary["board"] = boardDictionary
+            elif (compareResult == 0):
+                outputDictionary["gameStatus"] = "error: no tiles can be shifted"
+
+        elif (messageDictionary["direction"] == "right"):
+
+            for row in range(1, messageDictionary["board"]["rowCount"] + 1):
+
+                columnCount = messageDictionary["board"]["columnCount"]
+                outListIndex = inListIndex = ((row * columnCount) - 1)
+                previousElement = 0
+
+                for column in range(0, messageDictionary["board"]["columnCount"]):
+                    if (messageDictionary["board"]["grid"][inListIndex] != 0):
+                        if (previousElement == 0):
+                            previousElement = messageDictionary["board"]["grid"][inListIndex]
+                        else:
+                            if (previousElement == messageDictionary["board"]["grid"][inListIndex]):
+                                power = messageDictionary["board"]["grid"][inListIndex]
+                                sumElements = 2 * (2 ** power)
+                                score = score + sumElements
+                                outList[outListIndex] = int(math.log(sumElements, 2))
+                                outListIndex = outListIndex - 1
+                                previousElement = 0
+                            else:
+                                outList[outListIndex] = previousElement
+                                outListIndex = outListIndex - 1
+                                previousElement = messageDictionary["board"]["grid"][inListIndex]
+                    inListIndex = inListIndex - 1
+                if previousElement != 0:
+                    outList[outListIndex] = previousElement
+
+            compareResult = cmp(messageDictionary["board"]["grid"], outList)
+
+            if (compareResult != 0):
+                outputDictionary["score"] = score
                 boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
                 boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
                 boardDictionary["grid"] = outList

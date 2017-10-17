@@ -152,10 +152,67 @@ class SwipeGameTest(TestCase):
     #     outputDictionary = swipeGame(inputDictionary)
     #     self.assertEquals(resultDictionary, outputDictionary)
 
-    def test200_010_shouldSwipeLeft(self):
+    # def test200_010_shouldSwipeLeft(self):
+    #     inputDictionary = {}
+    #     inputDictionary["op"] = "swipe"
+    #     inputDictionary["direction"] = "left"
+    #     boardDictionary = {}
+    #     boardDictionary["rowCount"] = 4
+    #     boardDictionary["columnCount"] = 4
+    #     gridList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0]
+    #     boardDictionary["grid"] = gridList
+    #     inputDictionary["board"] = boardDictionary
+    #     resultDictionary = {}
+    #     resultDictionary["score"] = 0
+    #     resboardDictionary = {}
+    #     resboardDictionary["columnCount"] = 4
+    #     resboardDictionary["rowCount"] = 4
+    #     resboardDictionary["grid"] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+    #     resultDictionary["board"] = resboardDictionary
+    #     resultDictionary["gameStatus"] = "underway"
+    #     outputDictionary = swipeGame(inputDictionary)
+    #     self.assertEquals(resultDictionary, outputDictionary)
+    #
+    # def test200_020_shouldSwipeLeft(self):
+    #     inputDictionary = {}
+    #     inputDictionary["op"] = "swipe"
+    #     inputDictionary["direction"] = "left"
+    #     boardDictionary = {}
+    #     boardDictionary["rowCount"] = 4
+    #     boardDictionary["columnCount"] = 4
+    #     gridList = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0]
+    #     boardDictionary["grid"] = gridList
+    #     inputDictionary["board"] = boardDictionary
+    #     resultDictionary = {}
+    #     resultDictionary["score"] = 4
+    #     resboardDictionary = {}
+    #     resboardDictionary["columnCount"] = 4
+    #     resboardDictionary["rowCount"] = 4
+    #     resboardDictionary["grid"] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0]
+    #     resultDictionary["board"] = resboardDictionary
+    #     resultDictionary["gameStatus"] = "underway"
+    #     outputDictionary = swipeGame(inputDictionary)
+    #     self.assertEquals(resultDictionary, outputDictionary)
+    #
+    # def test200_030_validateNoTilesShift(self):
+    #     inputDictionary = {}
+    #     inputDictionary["op"] = "swipe"
+    #     inputDictionary["direction"] = "left"
+    #     boardDictionary = {}
+    #     boardDictionary["rowCount"] = 4
+    #     boardDictionary["columnCount"] = 4
+    #     gridList = [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0]
+    #     boardDictionary["grid"] = gridList
+    #     inputDictionary["board"] = boardDictionary
+    #     resultDictionary = {}
+    #     resultDictionary["gameStatus"] = "error: no tiles can be shifted"
+    #     outputDictionary = swipeGame(inputDictionary)
+    #     self.assertEquals(resultDictionary, outputDictionary)
+
+    def test300_010_shouldSwipeRight(self):
         inputDictionary = {}
         inputDictionary["op"] = "swipe"
-        inputDictionary["direction"] = "left"
+        inputDictionary["direction"] = "right"
         boardDictionary = {}
         boardDictionary["rowCount"] = 4
         boardDictionary["columnCount"] = 4
@@ -167,16 +224,16 @@ class SwipeGameTest(TestCase):
         resboardDictionary = {}
         resboardDictionary["columnCount"] = 4
         resboardDictionary["rowCount"] = 4
-        resboardDictionary["grid"] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+        resboardDictionary["grid"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1]
         resultDictionary["board"] = resboardDictionary
         resultDictionary["gameStatus"] = "underway"
         outputDictionary = swipeGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
 
-    def test200_020_shouldSwipeLeft(self):
+    def test300_020_shouldSwipeRight(self):
         inputDictionary = {}
         inputDictionary["op"] = "swipe"
-        inputDictionary["direction"] = "left"
+        inputDictionary["direction"] = "right"
         boardDictionary = {}
         boardDictionary["rowCount"] = 4
         boardDictionary["columnCount"] = 4
@@ -188,16 +245,16 @@ class SwipeGameTest(TestCase):
         resboardDictionary = {}
         resboardDictionary["columnCount"] = 4
         resboardDictionary["rowCount"] = 4
-        resboardDictionary["grid"] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0]
+        resboardDictionary["grid"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2]
         resultDictionary["board"] = resboardDictionary
         resultDictionary["gameStatus"] = "underway"
         outputDictionary = swipeGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
 
-    def test200_030_validateNoTilesShift(self):
+    def test300_030_validateNoTilesShift(self):
         inputDictionary = {}
         inputDictionary["op"] = "swipe"
-        inputDictionary["direction"] = "left"
+        inputDictionary["direction"] = "right"
         boardDictionary = {}
         boardDictionary["rowCount"] = 4
         boardDictionary["columnCount"] = 4
@@ -205,6 +262,12 @@ class SwipeGameTest(TestCase):
         boardDictionary["grid"] = gridList
         inputDictionary["board"] = boardDictionary
         resultDictionary = {}
-        resultDictionary["gameStatus"] = "error: no tiles can be shifted"
+        resultDictionary["score"] = 0
+        resboardDictionary = {}
+        resboardDictionary["columnCount"] = 4
+        resboardDictionary["rowCount"] = 4
+        resboardDictionary["grid"] = [0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+        resultDictionary["board"] = resboardDictionary
+        resultDictionary["gameStatus"] = "underway"
         outputDictionary = swipeGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)

@@ -2,15 +2,29 @@ import math
 from random import *
 
 def swipeGame(messageDictionary):
+    """
+             swipeGame is a function and is invoked in dispatch when the operation to be performed is swipe
+             the grid.
+        :param messageDictionary: Is a dictionary which consists the following name value pairs: operation (op), direction,
+                                 board dictionary which consists of row count (rowCount), column count (columnCount) and grid.
+                                 All the params are mandatory.
+        :return:                 A dictionary which consists of the following name value pairs: score, board, game status.
+                                 The board consists of another dictionary which consists of 3 name value pairs:
+                                 rowCount, columnCount & grid.
+        """
+
+    # outputDictionary is the dictionary which return to dispatch.
     outputDictionary = {}
     outputDictionary["gameStatus"] = "underway"
 
+    #validating direction
     if "direction" not in messageDictionary.keys():
         outputDictionary["gameStatus"] = "error: missing direction"
 
     elif (messageDictionary["direction"].lower() != "up" and messageDictionary["direction"].lower() != "down" and messageDictionary["direction"].lower() != "left" and messageDictionary["direction"].lower() != "right"):
         outputDictionary["gameStatus"] = "error: invalid direction"
 
+    #validating columnCount
     if "columnCount" not in messageDictionary["board"]:
         outputDictionary["gameStatus"] = "error: missing columnCount"
 
@@ -20,6 +34,7 @@ def swipeGame(messageDictionary):
     elif (messageDictionary["board"]["columnCount"] <= 1 or messageDictionary["board"]["columnCount"] > 100):
         outputDictionary["gameStatus"] = "error: columnCount is out of bounds"
 
+    #validating rowCount
     if "rowCount" not in messageDictionary["board"]:
         outputDictionary["gameStatus"] = "error: missing rowCount"
 
@@ -33,6 +48,7 @@ def swipeGame(messageDictionary):
         if (messageDictionary["board"]["rowCount"] > 1 and messageDictionary["board"]["rowCount"] <= 100):
             if (messageDictionary["board"]["columnCount"] > 1 and messageDictionary["board"]["columnCount"] <= 100):
 
+                #validating grid
                 if "grid" not in messageDictionary["board"]:
                     outputDictionary["gameStatus"] = "error: missing grid"
                 else:
@@ -61,10 +77,12 @@ def swipeGame(messageDictionary):
                             if count < 2:
                                 outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
 
+    #if every element of the input dictionary is validated
     if (outputDictionary["gameStatus"] == "underway"):
 
         x = len(messageDictionary["board"]["grid"])
 
+        #random number generation
         randomList = [1, 1, 1, 2]
         a = sample(randomList, 1)
 
@@ -72,12 +90,15 @@ def swipeGame(messageDictionary):
 
         score = 0
 
+        # boardDictionary is the dictionary which we use to store the rowCount, columnCount & grid. It is a part of the
+        #  outputDictionary.
         boardDictionary = {}
 
         outList = []
         for y in range(0, x):
             outList.append(0)
 
+        #perform swipe left
         if (messageDictionary["direction"].lower() == "left"):
 
             inListIndex = 0
@@ -107,6 +128,7 @@ def swipeGame(messageDictionary):
 
             compareResult = cmp(messageDictionary["board"]["grid"], outList)
 
+            #if compareResult is non zero then swipe is successful, else no tiles can be shifted
             if (compareResult != 0):
 
                 while (outList[position] != 0):
@@ -123,6 +145,7 @@ def swipeGame(messageDictionary):
                 outputDictionary["gameStatus"] = "error: no tiles can be shifted"
 
 
+        #perform swipe right
         elif (messageDictionary["direction"].lower() == "right"):
 
             for row in range(1, messageDictionary["board"]["rowCount"] + 1):
@@ -193,6 +216,7 @@ def swipeGame(messageDictionary):
 
                 outputDictionary["gameStatus"] = "error: no tiles can be shifted"
 
+        #perform swipe up
         elif (messageDictionary["direction"].lower() == "up"):
 
             columnCount = messageDictionary["board"]["columnCount"]
@@ -239,6 +263,7 @@ def swipeGame(messageDictionary):
             elif (compareResult == 0):
                 outputDictionary["gameStatus"] = "error: no tiles can be shifted"
 
+        #perform swipe down
         elif (messageDictionary["direction"].lower() == "down"):
 
             columnCount = messageDictionary["board"]["columnCount"]

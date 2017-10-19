@@ -156,6 +156,6 @@ validJson = '{"op": "swipe", "direction": "up", "board": {"columnCount": 2, "row
 validResult = dispatch.dispatch(validJson)
 print(("Input string:\t{0}\nOutput string:\t{1}\n").format(validJson, validResult))
 
-validJson = '{"op": "swipe", "direction": "down", "board": {"columnCount": 2, "rowCount": 2, "grid": [3,4,2,1]}}'
+validJson = '{"op": "swipe", "direction": "right", "board": {"columnCount": 2, "rowCount": 2, "grid": [3,4,2,1]}}'
 validResult = dispatch.dispatch(validJson)
 print(("Input string:\t{0}\nOutput string:\t{1}\n").format(validJson, validResult))

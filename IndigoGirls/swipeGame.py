@@ -33,30 +33,33 @@ def swipeGame(messageDictionary):
         if (messageDictionary["board"]["rowCount"] > 1 and messageDictionary["board"]["rowCount"] <= 100):
             if (messageDictionary["board"]["columnCount"] > 1 and messageDictionary["board"]["columnCount"] <= 100):
 
-                i = messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]
+                if "grid" not in messageDictionary["board"]:
+                    outputDictionary["gameStatus"] = "error: missing grid"
+                else:
+                    i = messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]
 
-                j = len(messageDictionary["board"]["grid"])
+                    j = len(messageDictionary["board"]["grid"])
 
-                if (i != j):
-                    outputDictionary["gameStatus"] = "error: invalid board"
+                    if (i != j):
+                        outputDictionary["gameStatus"] = "error: invalid board"
 
-                elif (i == j):
-                    for index in range(0,i):
-                        if (isinstance(messageDictionary["board"]["grid"][index], int) == False):
-                            outputDictionary["gameStatus"] = "error: invalid grid elements"
+                    elif (i == j):
+                        for index in range(0,i):
+                            if (isinstance(messageDictionary["board"]["grid"][index], int) == False):
+                                outputDictionary["gameStatus"] = "error: invalid grid elements"
 
-                    if (outputDictionary["gameStatus"] != "error: invalid grid elements"):
-                        for index in range(0, i):
-                            if (messageDictionary["board"]["grid"][index] < 0):
-                                outputDictionary["gameStatus"] = "error: Each item in the grid must be GE 0"
+                        if (outputDictionary["gameStatus"] != "error: invalid grid elements"):
+                            for index in range(0, i):
+                                if (messageDictionary["board"]["grid"][index] < 0):
+                                    outputDictionary["gameStatus"] = "error: Each item in the grid must be GE 0"
 
-                    if (outputDictionary["gameStatus"] != "error: Each item in the grid must be GE 0"):
-                        count = 0
-                        for index in range(0, i):
-                            if (messageDictionary["board"]["grid"][index] > 0):
-                                count = count + 1
-                        if count < 2:
-                            outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
+                        if (outputDictionary["gameStatus"] != "error: Each item in the grid must be GE 0"):
+                            count = 0
+                            for index in range(0, i):
+                                if (messageDictionary["board"]["grid"][index] > 0):
+                                    count = count + 1
+                            if count < 2:
+                                outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
 
     if (outputDictionary["gameStatus"] == "underway"):
 
@@ -66,8 +69,6 @@ def swipeGame(messageDictionary):
         a = sample(randomList, 1)
 
         position = randint(0, x - 1)
-
-        sumElements = 0
 
         score = 0
 

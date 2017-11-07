@@ -33,3 +33,13 @@ class RecommendGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: missing board"
         outputDictionary = recommendGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test300_010_shouldvalidatecolumnCount(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 0
+        boardDictionary = {}
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: missing columnCount"
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

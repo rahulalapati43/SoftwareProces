@@ -14,4 +14,5 @@ def recommendGame(messageDictionary):
 
     if "board" not in messageDictionary.keys():
         outputDictionary["gameStatus"] = "error: missing board"
+
     return outputDictionary

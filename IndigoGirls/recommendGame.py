@@ -9,4 +9,5 @@ def recommendGame(messageDictionary):
     elif (isinstance(messageDictionary["moves"], int) == False):
         outputDictionary["gameStatus"] = "error: moves is not an integer"
 
+
     return outputDictionary

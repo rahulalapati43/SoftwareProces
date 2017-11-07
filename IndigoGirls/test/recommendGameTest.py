@@ -16,3 +16,11 @@ class RecommendGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: moves is not an integer"
         outputDictionary = recommendGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test100_030_shouldvalidateMovesGE0(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = -1
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: moves must be GE 0"
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

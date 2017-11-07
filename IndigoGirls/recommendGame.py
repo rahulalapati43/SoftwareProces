@@ -1,2 +1,9 @@
+
 def recommendGame(messageDictionary):
-    pass
+
+    outputDictionary = {}
+
+    if "moves" not in messageDictionary.keys():
+        outputDictionary["moves"] = 0
+
+    return outputDictionary

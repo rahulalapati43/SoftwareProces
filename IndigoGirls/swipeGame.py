@@ -24,58 +24,64 @@ def swipeGame(messageDictionary):
     elif (messageDictionary["direction"].lower() != "up" and messageDictionary["direction"].lower() != "down" and messageDictionary["direction"].lower() != "left" and messageDictionary["direction"].lower() != "right"):
         outputDictionary["gameStatus"] = "error: invalid direction"
 
-    #validating columnCount
-    if "columnCount" not in messageDictionary["board"]:
-        outputDictionary["gameStatus"] = "error: missing columnCount"
+    #validating board
+    if "board" not in messageDictionary.keys():
+        outputDictionary["gameStatus"] = "error: missing board"
 
-    elif (isinstance(messageDictionary["board"]["columnCount"], int) == False):
-        outputDictionary["gameStatus"] = "error: columnCount is not an integer"
+    if "board" in messageDictionary.keys():
+        #validating columnCount
+        if "columnCount" not in messageDictionary["board"]:
+            outputDictionary["gameStatus"] = "error: missing columnCount"
 
-    elif (messageDictionary["board"]["columnCount"] <= 1 or messageDictionary["board"]["columnCount"] > 100):
-        outputDictionary["gameStatus"] = "error: columnCount is out of bounds"
+        elif (isinstance(messageDictionary["board"]["columnCount"], int) == False):
+            outputDictionary["gameStatus"] = "error: columnCount is not an integer"
 
-    #validating rowCount
-    if "rowCount" not in messageDictionary["board"]:
-        outputDictionary["gameStatus"] = "error: missing rowCount"
+        elif (messageDictionary["board"]["columnCount"] <= 1 or messageDictionary["board"]["columnCount"] > 100):
+            outputDictionary["gameStatus"] = "error: columnCount is out of bounds"
 
-    elif (isinstance(messageDictionary["board"]["rowCount"], int) == False):
-        outputDictionary["gameStatus"] = "error: rowCount is not an integer"
+        #validating rowCount
+        if "rowCount" not in messageDictionary["board"]:
+            outputDictionary["gameStatus"] = "error: missing rowCount"
 
-    elif (messageDictionary["board"]["rowCount"] <= 1 or messageDictionary["board"]["rowCount"] > 100):
-        outputDictionary["gameStatus"] = "error: rowCount is out of bounds"
+        elif (isinstance(messageDictionary["board"]["rowCount"], int) == False):
+            outputDictionary["gameStatus"] = "error: rowCount is not an integer"
 
-    if ("rowCount" in messageDictionary["board"] and "columnCount" in messageDictionary["board"]):
-        if (messageDictionary["board"]["rowCount"] > 1 and messageDictionary["board"]["rowCount"] <= 100):
-            if (messageDictionary["board"]["columnCount"] > 1 and messageDictionary["board"]["columnCount"] <= 100):
+        elif (messageDictionary["board"]["rowCount"] <= 1 or messageDictionary["board"]["rowCount"] > 100):
+            outputDictionary["gameStatus"] = "error: rowCount is out of bounds"
 
-                #validating grid
-                if "grid" not in messageDictionary["board"]:
-                    outputDictionary["gameStatus"] = "error: missing grid"
-                else:
-                    i = messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]
+    if "board" in messageDictionary.keys():
+        if ("rowCount" in messageDictionary["board"] and "columnCount" in messageDictionary["board"]):
+            if (messageDictionary["board"]["rowCount"] > 1 and messageDictionary["board"]["rowCount"] <= 100):
+                if (messageDictionary["board"]["columnCount"] > 1 and messageDictionary["board"]["columnCount"] <= 100):
 
-                    j = len(messageDictionary["board"]["grid"])
+                    #validating grid
+                    if "grid" not in messageDictionary["board"]:
+                        outputDictionary["gameStatus"] = "error: missing grid"
+                    else:
+                        i = messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]
 
-                    if (i != j):
-                        outputDictionary["gameStatus"] = "error: invalid board"
+                        j = len(messageDictionary["board"]["grid"])
 
-                    elif (i == j):
-                        for index in range(0,i):
-                            if (isinstance(messageDictionary["board"]["grid"][index], int) == False):
-                                outputDictionary["gameStatus"] = "error: invalid grid elements"
+                        if (i != j):
+                            outputDictionary["gameStatus"] = "error: invalid board"
 
-                        if (outputDictionary["gameStatus"] != "error: invalid grid elements"):
-                            for index in range(0, i):
-                                if (messageDictionary["board"]["grid"][index] < 0):
-                                    outputDictionary["gameStatus"] = "error: Each item in the grid must be GE 0"
+                        elif (i == j):
+                            for index in range(0,i):
+                                if (isinstance(messageDictionary["board"]["grid"][index], int) == False):
+                                    outputDictionary["gameStatus"] = "error: invalid grid elements"
 
-                        if (outputDictionary["gameStatus"] != "error: Each item in the grid must be GE 0"):
-                            count = 0
-                            for index in range(0, i):
-                                if (messageDictionary["board"]["grid"][index] > 0):
-                                    count = count + 1
-                            if count < 2:
-                                outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
+                            if (outputDictionary["gameStatus"] != "error: invalid grid elements"):
+                                for index in range(0, i):
+                                    if (messageDictionary["board"]["grid"][index] < 0):
+                                        outputDictionary["gameStatus"] = "error: Each item in the grid must be GE 0"
+
+                            if (outputDictionary["gameStatus"] != "error: Each item in the grid must be GE 0"):
+                                count = 0
+                                for index in range(0, i):
+                                    if (messageDictionary["board"]["grid"][index] > 0):
+                                        count = count + 1
+                                if count < 2:
+                                    outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
 
     #if every element of the input dictionary is validated
     if (outputDictionary["gameStatus"] == "underway"):

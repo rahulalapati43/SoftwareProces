@@ -76,6 +76,11 @@ def swipeGame(messageDictionary):
                                         outputDictionary["gameStatus"] = "error: Each item in the grid must be GE 0"
 
                             if (outputDictionary["gameStatus"] != "error: Each item in the grid must be GE 0"):
+                                for index in range(0, i):
+                                    if (messageDictionary["board"]["grid"][index] > 2**i):
+                                        outputDictionary["gameStatus"] = "error: Each item in the grid must be LE 2**(rowCount * columnCount)"
+                                  
+                            if (outputDictionary["gameStatus"] != "error: Each item in the grid must be LE 2**(rowCount * columnCount"):            
                                 count = 0
                                 for index in range(0, i):
                                     if (messageDictionary["board"]["grid"][index] > 0):

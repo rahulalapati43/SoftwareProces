@@ -75,18 +75,18 @@ def swipeGame(messageDictionary):
                                     if (messageDictionary["board"]["grid"][index] < 0):
                                         outputDictionary["gameStatus"] = "error: Each item in the grid must be GE 0"
 
-                            if (outputDictionary["gameStatus"] != "error: Each item in the grid must be GE 0"):
-                                for index in range(0, i):
-                                    if (messageDictionary["board"]["grid"][index] > 2**i):
-                                        outputDictionary["gameStatus"] = "error: Each item in the grid must be LE 2**(rowCount * columnCount)"
-                                  
-                            if (outputDictionary["gameStatus"] != "error: Each item in the grid must be LE 2**(rowCount * columnCount"):            
-                                count = 0
-                                for index in range(0, i):
-                                    if (messageDictionary["board"]["grid"][index] > 0):
-                                        count = count + 1
-                                if count < 2:
-                                    outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
+                                if (outputDictionary["gameStatus"] != "error: Each item in the grid must be GE 0"):
+                                    for index in range(0, i):
+                                        if (messageDictionary["board"]["grid"][index] > 2**i):
+                                            outputDictionary["gameStatus"] = "error: Each item in the grid must be LE 2**(rowCount * columnCount)"
+
+                                    if (outputDictionary["gameStatus"] != "error: Each item in the grid must be LE 2**(rowCount * columnCount)"):
+                                        count = 0
+                                        for index in range(0, i):
+                                            if (messageDictionary["board"]["grid"][index] > 0):
+                                                count = count + 1
+                                        if count < 2:
+                                            outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
 
     #if every element of the input dictionary is validated
     if (outputDictionary["gameStatus"] == "underway"):

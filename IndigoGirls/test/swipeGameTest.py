@@ -1,5 +1,5 @@
 from unittest import TestCase
-from swipeGame import swipeGame
+from IndigoGirls.swipeGame import swipeGame
 
 class SwipeGameTest(TestCase):
     # def test100_010_shouldValidateopanddirection(self):
@@ -454,3 +454,19 @@ class SwipeGameTest(TestCase):
             resultDictionary["gameStatus"] = "error: Each item in the grid must be LE 2**(rowCount * columnCount)"
             outputDictionary = swipeGame(inputDictionary)
             self.assertEquals(resultDictionary,outputDictionary)
+
+
+        # def test600_020_shouldValidateGridElementsLE2timesrowcol(self):
+        #     inputDictionary = {}
+        #     inputDictionary["op"] = "swipe"
+        #     inputDictionary["direction"] = "down"
+        #     boardDictionary = {}
+        #     boardDictionary["rowCount"] = 2
+        #     boardDictionary["columnCount"] = 2
+        #     gridList = [0,1,16, 0]
+        #     boardDictionary["grid"] = gridList
+        #     inputDictionary["board"] = boardDictionary
+        #     resultDictionary = {}
+        #     resultDictionary["gameStatus"] = "error: Each item in the grid must be LE 2**(rowCount * columnCount)"
+        #     outputDictionary = swipeGame(inputDictionary)
+        #     self.assertEquals(resultDictionary, outputDictionary)

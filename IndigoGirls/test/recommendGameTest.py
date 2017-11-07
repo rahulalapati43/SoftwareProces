@@ -24,3 +24,12 @@ class RecommendGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: moves must be GE 0"
         outputDictionary = recommendGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test200_010_shouldvalidateBoard(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 0
+        boardDictionary = {}
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: missing board"
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

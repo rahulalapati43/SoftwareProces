@@ -15,4 +15,7 @@ def recommendGame(messageDictionary):
     if "board" not in messageDictionary.keys():
         outputDictionary["gameStatus"] = "error: missing board"
 
+    elif "columnCount" not in messageDictionary["board"]:
+        outputDictionary["gameStatus"] = "error: missing columnCount"
+
     return outputDictionary

@@ -11,4 +11,7 @@ def recommendGame(messageDictionary):
 
     elif (messageDictionary["moves"] < 0):
         outputDictionary["gameStatus"] = "error: moves must be GE 0"
+
+    if "board" not in messageDictionary.keys():
+        outputDictionary["gameStatus"] = "error: missing board"
     return outputDictionary

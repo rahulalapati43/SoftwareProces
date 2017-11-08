@@ -2,6 +2,7 @@
 def recommendGame(messageDictionary):
 
     outputDictionary = {}
+    outputDictionary["gameStatus"] = "underway"
 
     if "moves" not in messageDictionary.keys():
         messageDictionary["moves"] = 0
@@ -47,5 +48,19 @@ def recommendGame(messageDictionary):
             for index in range(0,gridLength):
                 if(isinstance(messageDictionary["board"]["grid"][index], int) == False):
                     outputDictionary["gameStatus"] = "error: grid elements are not integers"
+
+            if (outputDictionary["gameStatus"] != "error: grid elements are not integers"):
+                for index in range(0,gridLength):
+                    if(messageDictionary["board"]["grid"][index] < 0):
+                        outputDictionary["gameStatus"] = "error: grid elements must be GE 0"
+
+                if (outputDictionary["gameStatus"] != "error: grid elements must be GE 0"):
+                    upperBound = 2 ** rowcolumnProd
+                    for index in range(0,gridLength):
+                        if (messageDictionary["board"]["grid"][index] > upperBound):
+                            outputDictionary["gameStatus"] = "error: grid elements must be LE 2 ** grid Length"
+
+
+
 
     return outputDictionary

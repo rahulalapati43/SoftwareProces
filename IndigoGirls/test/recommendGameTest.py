@@ -205,3 +205,17 @@ class RecommendGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: grid elements must be LE 2 ** grid Length"
         outputDictionary = recommendGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test500_070_shouldvalidateNofewerthan2GridElementsGT0(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 0
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 2
+        boardDictionary["rowCount"] = 2
+        gridList = [0,2,0,0]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: No fewer than 2 items can be GT 0"
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

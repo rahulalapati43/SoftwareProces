@@ -35,4 +35,6 @@ def recommendGame(messageDictionary):
 
     elif "grid" not in messageDictionary["board"]:
         outputDictionary["gameStatus"] = "error: missing grid"
+
+
     return outputDictionary

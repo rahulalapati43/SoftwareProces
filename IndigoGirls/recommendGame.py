@@ -43,4 +43,5 @@ def recommendGame(messageDictionary):
         if (rowcolumnCount != gridLength):
             outputDictionary["gameStatus"] = "error: invalid grid length"
 
+
     return outputDictionary

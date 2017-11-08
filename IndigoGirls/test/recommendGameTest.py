@@ -123,3 +123,15 @@ class RecommendGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: rowCount is out of bounds"
         outputDictionary = recommendGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test500_010_shouldvalidateGrid(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 0
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 100
+        boardDictionary["rowCount"] = 100
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: missing grid"
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

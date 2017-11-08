@@ -170,10 +170,38 @@ class RecommendGameTest(TestCase):
         boardDictionary = {}
         boardDictionary["columnCount"] = 2
         boardDictionary["rowCount"] = 2
-        gridList = [1,2,3,'4']
+        gridList = ['1',2,3,'4']
         boardDictionary["grid"] = gridList
         inputDictionary["board"] = boardDictionary
         resultDictionary = {}
         resultDictionary["gameStatus"] = "error: grid elements are not integers"
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
+
+    def test500_050_shouldvalidateGridElementsGE0(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 0
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 2
+        boardDictionary["rowCount"] = 2
+        gridList = [-1,2,3,4]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: grid elements must be GE 0"
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
+
+    def test500_060_shouldvalidateGridElementsUpperBound(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 0
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 2
+        boardDictionary["rowCount"] = 2
+        gridList = [1,2,16,17]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: grid elements must be LE 2 ** grid Length"
         outputDictionary = recommendGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)

@@ -33,4 +33,6 @@ def recommendGame(messageDictionary):
     elif ((messageDictionary["board"]["rowCount"] <= 1) or (messageDictionary["board"]["rowCount"] > 100)):
         outputDictionary["gameStatus"] = "error: rowCount is out of bounds"
 
+    elif "grid" not in messageDictionary["board"]:
+        outputDictionary["gameStatus"] = "error: missing grid"
     return outputDictionary

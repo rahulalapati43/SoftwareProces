@@ -36,5 +36,11 @@ def recommendGame(messageDictionary):
     elif "grid" not in messageDictionary["board"]:
         outputDictionary["gameStatus"] = "error: missing grid"
 
+    elif "grid" in messageDictionary["board"]:
+        rowcolumnCount = messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]
+        gridLength = len(messageDictionary["board"]["grid"])
+
+        if (rowcolumnCount != gridLength):
+            outputDictionary["gameStatus"] = "error: invalid grid length"
 
     return outputDictionary

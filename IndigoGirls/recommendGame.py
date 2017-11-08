@@ -60,7 +60,14 @@ def recommendGame(messageDictionary):
                         if (messageDictionary["board"]["grid"][index] > upperBound):
                             outputDictionary["gameStatus"] = "error: grid elements must be LE 2 ** grid Length"
 
+                    if (outputDictionary["gameStatus"] != "error: grid elements must be LE 2 ** grid Length"):
+                        countGT0 = 0
+                        for index in range(0, gridLength):
+                            if (messageDictionary["board"]["grid"][index] > 0):
+                                countGT0 = countGT0 + 1
 
+                        if countGT0 < 2:
+                            outputDictionary["gameStatus"] = "error: No fewer than 2 items can be GT 0"
 
 
     return outputDictionary

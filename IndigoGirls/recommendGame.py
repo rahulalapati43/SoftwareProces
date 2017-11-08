@@ -18,4 +18,7 @@ def recommendGame(messageDictionary):
     elif "columnCount" not in messageDictionary["board"]:
         outputDictionary["gameStatus"] = "error: missing columnCount"
 
+    elif (isinstance(messageDictionary["board"]["columnCount"], int) == False):
+        outputDictionary["gameStatus"] = "error: columnCount is not an integer"
+
     return outputDictionary

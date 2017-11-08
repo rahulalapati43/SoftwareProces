@@ -55,7 +55,7 @@ class RecommendGameTest(TestCase):
         outputDictionary = recommendGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
 
-    def test300_030_shouldvalidatecolumnCountGT0(self):
+    def test300_030_shouldvalidatecolumnCountGT1(self):
         inputDictionary = {}
         inputDictionary["moves"] = 0
         boardDictionary = {}

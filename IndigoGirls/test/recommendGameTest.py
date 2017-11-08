@@ -198,7 +198,7 @@ class RecommendGameTest(TestCase):
         boardDictionary = {}
         boardDictionary["columnCount"] = 2
         boardDictionary["rowCount"] = 2
-        gridList = [1,2,16,17]
+        gridList = [0,2,16,17]
         boardDictionary["grid"] = gridList
         inputDictionary["board"] = boardDictionary
         resultDictionary = {}

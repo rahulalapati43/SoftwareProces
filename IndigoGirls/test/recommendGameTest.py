@@ -54,3 +54,25 @@ class RecommendGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: columnCount is not an integer"
         outputDictionary = recommendGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test300_030_shouldvalidatecolumnCountGT0(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 0
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 0
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: columnCount is out of bounds"
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
+
+    def test300_040_shouldvalidatecolumnCountLE100(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 0
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 101
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: columnCount is out of bounds"
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

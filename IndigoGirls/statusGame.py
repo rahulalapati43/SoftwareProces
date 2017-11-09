@@ -39,4 +39,6 @@ def statusGame(messageDictionary):
     elif ("grid" not in messageDictionary["board"].keys()):
         outputDictionary["gameStatus"] = "error: missing grid"
 
+
+
     return outputDictionary

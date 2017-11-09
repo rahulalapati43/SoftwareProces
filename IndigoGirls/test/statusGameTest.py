@@ -140,7 +140,7 @@ class StatusGameTest(TestCase):
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
 
-    def test500_010_shouldvalidatemissingGird(self):
+    def test500_010_shouldvalidatemissingGrid(self):
         inputDictionary = {}
         inputDictionary["tile"] = 2
         boardDictionary = {}
@@ -149,5 +149,19 @@ class StatusGameTest(TestCase):
         inputDictionary["board"] = boardDictionary
         resultDictionary = {}
         resultDictionary["gameStatus"] = "error: missing grid"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
+
+    def test500_020_shouldvalidateGridLength(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 2
+        boardDictionary["rowCount"] = 2
+        gridList = [0,1,1,0,1]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: invalid grid length"
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)

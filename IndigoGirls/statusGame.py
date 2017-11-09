@@ -53,8 +53,18 @@ def statusGame(messageDictionary):
 
             if (outputDictionary["gameStatus"] != "error: invalid grid elements"):
                 for index in range(0,rowcolCountprod):
-                    if(messageDictionary["board"]["grid"][index] < 0):
+                    if (messageDictionary["board"]["grid"][index] < 0):
                         outputDictionary["gameStatus"] = "error: grid Elements must be GE 0"
+
+            if (outputDictionary["gameStatus"] != "error: grid Elements must be GE 0"):
+                countGT0 = 0
+                for index in range(0,rowcolCountprod):
+                    if (messageDictionary["board"]["grid"][index] > 0):
+                        countGT0 = countGT0 + 1
+
+                if countGT0 < 2:
+                    outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
+
 
 
     return outputDictionary

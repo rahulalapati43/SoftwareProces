@@ -36,7 +36,7 @@ class StatusGameTest(TestCase):
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
 
-    def test300_010_shouldvalidatecolumnCountInt(self):
+    def test300_020_shouldvalidatecolumnCountInt(self):
         inputDictionary = {}
         inputDictionary["tile"] = 2
         boardDictionary = {}
@@ -47,4 +47,24 @@ class StatusGameTest(TestCase):
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
 
+    def test300_030_shouldvalidatecolumnCountGT1(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 1
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: columnCount is out of bounds"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
 
+    def test300_040_shouldvalidatecolumnCountLE100(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 101
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: columnCount is out of bounds"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

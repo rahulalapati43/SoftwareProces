@@ -1,3 +1,7 @@
 
 def statusGame(messageDictionary):
-    pass
+
+    if "tile" not in messageDictionary.keys():
+        messageDictionary["tile"] = 2048
+
+    return messageDictionary

@@ -15,5 +15,7 @@ def statusGame(messageDictionary):
     elif "columnCount" not in messageDictionary["board"].keys():
         outputDictionary["gameStatus"] = "error: missing columnCount"
 
+    elif (isinstance(messageDictionary["board"]["columnCount"],int) == False):
+        outputDictionary["gameStatus"] = "error: columnCount is not an integer"
 
     return outputDictionary

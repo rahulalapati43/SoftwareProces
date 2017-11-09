@@ -68,3 +68,50 @@ class StatusGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: columnCount is out of bounds"
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test400_010_shouldvalidatemissingrowCount(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 2
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: missing rowCount"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
+
+    def test400_020_shouldvalidaterowCountInt(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 2
+        boardDictionary["rowCount"] = '1'
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: rowCount is not an integer"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
+
+    def test400_030_shouldvalidaterowCountGT1(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 2
+        boardDictionary["rowCount"] = 1
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: rowCount is out of bounds"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
+
+    def test400_040_shouldvalidaterowCountLE100(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 100
+        boardDictionary["rowCount"] = 1001
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: rowCount is out of bounds"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

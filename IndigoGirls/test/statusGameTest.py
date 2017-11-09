@@ -221,3 +221,17 @@ class StatusGameTest(TestCase):
         resultDictionary["gameStatus"] = "win"
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test600_020_shouldvalidateLose(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 32
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 4
+        boardDictionary["rowCount"] = 4
+        gridList = [1,2,3,4,4,3,2,1,1,2,3,4,4,3,2,1]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "lose"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

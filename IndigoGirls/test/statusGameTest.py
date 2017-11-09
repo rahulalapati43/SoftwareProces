@@ -8,3 +8,13 @@ class StatusGameTest(TestCase):
         resultDictionary["tile"] = 2048
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary,outputDictionary)
+
+    def test100_020_shouldValidatetileGE2(self):
+        inputDictionary = {}
+        inputDictionary["tiles"] = 0
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "invalid tile value"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary,outputDictionary)
+
+

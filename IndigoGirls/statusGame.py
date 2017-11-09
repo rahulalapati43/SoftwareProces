@@ -39,6 +39,10 @@ def statusGame(messageDictionary):
     elif ("grid" not in messageDictionary["board"].keys()):
         outputDictionary["gameStatus"] = "error: missing grid"
 
-
+    elif ("grid" in messageDictionary["board"].keys()):
+        rowcolCountprod = (messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"])
+        gridLength = len(messageDictionary["board"]["grid"])
+        if (rowcolCountprod != gridLength):
+            outputDictionary["gameStatus"] = "error: invalid grid length"
 
     return outputDictionary

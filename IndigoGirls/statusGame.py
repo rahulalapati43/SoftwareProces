@@ -1,0 +1,3 @@
+
+def statusGame(messageDictionary):
+    pass

@@ -1,5 +1,5 @@
 import math
-from random import *
+from IndigoGirls.swipeGame import swipeGame
 
 def statusGame(messageDictionary):
 
@@ -67,12 +67,38 @@ def statusGame(messageDictionary):
                 if countGT0 < 2:
                     outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
 
+
     if (outputDictionary["gameStatus"] == "underway"):
         winningTile = int(math.log(messageDictionary["tile"], 2))
         for index in range(0,rowcolCountprod):
-            if (winningTile == messageDictionary["board"]["grid"][index]):
+            if (messageDictionary["board"]["grid"][index]  >= winningTile):
                 outputDictionary["gameStatus"] = "win"
 
+        if (outputDictionary["gameStatus"] != "win"):
+            inputDictionary = {}
+            boardDictionary = {}
+
+            boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
+            boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
+            boardDictionary["grid"] = messageDictionary["board"]["grid"]
+            inputDictionary["board"] = boardDictionary
+
+            inputDictionary["direction"] = "left"
+            leftDictionary = swipeGame(inputDictionary)
+
+            inputDictionary["direction"] = "right"
+            rightDictionary = swipeGame(inputDictionary)
+
+            inputDictionary["direction"] = "up"
+            upDictionary = swipeGame(inputDictionary)
+
+            inputDictionary["direction"] = "down"
+            downDictionary = swipeGame(inputDictionary)
+
+            if ((leftDictionary["gameStatus"] == "error: no tiles can be shifted") and (rightDictionary["gameStatus"] == "error: no tiles can be shifted") and
+                    (upDictionary["gameStatus"] == "error: no tiles can be shifted") and (downDictionary["gameStatus"] == "error: no tiles can be shifted")):
+
+                outputDictionary["gameStatus"] = "lose"
 
 
     return outputDictionary

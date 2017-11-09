@@ -17,7 +17,17 @@ class StatusGameTest(TestCase):
     #     outputDictionary = statusGame(inputDictionary)
     #     self.assertEquals(resultDictionary,outputDictionary)
 
-
+    def test100_030_shouldvalidatetileUpperBound(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 200
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 2
+        boardDictionary["rowCount"] = 2
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: invalid tile value"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
 
     def test200_010_shouldvalidateBoard(self):
         inputDictionary = {}

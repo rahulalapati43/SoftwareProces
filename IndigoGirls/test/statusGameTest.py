@@ -235,3 +235,17 @@ class StatusGameTest(TestCase):
         resultDictionary["gameStatus"] = "lose"
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test600_030_shouldvalidateUnderway(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2048
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 4
+        boardDictionary["rowCount"] = 4
+        gridList = [0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "underway"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

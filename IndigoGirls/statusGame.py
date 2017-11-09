@@ -97,8 +97,10 @@ def statusGame(messageDictionary):
 
             if ((leftDictionary["gameStatus"] == "error: no tiles can be shifted") and (rightDictionary["gameStatus"] == "error: no tiles can be shifted") and
                     (upDictionary["gameStatus"] == "error: no tiles can be shifted") and (downDictionary["gameStatus"] == "error: no tiles can be shifted")):
-
                 outputDictionary["gameStatus"] = "lose"
+
+            else:
+                outputDictionary["gameStatus"] = "underway"
 
 
     return outputDictionary

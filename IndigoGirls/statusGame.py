@@ -2,6 +2,7 @@
 def statusGame(messageDictionary):
 
     outputDictionary = {}
+    outputDictionary["gameStatus"] = "underway"
 
     if "board" not in messageDictionary.keys():
         outputDictionary["gameStatus"] = "error: missing board"
@@ -49,6 +50,11 @@ def statusGame(messageDictionary):
             for index in range(0,rowcolCountprod):
                 if (isinstance(messageDictionary["board"]["grid"][index],int) == False):
                     outputDictionary["gameStatus"] = "error: invalid grid Elements"
+
+            if (outputDictionary["gameStatus"] != "error: invalid grid elements"):
+                for index in range(0,rowcolCountprod):
+                    if(messageDictionary["board"]["grid"][index] < 0):
+                        outputDictionary["gameStatus"] = "error: grid Elements must be GE 0"
 
 
     return outputDictionary

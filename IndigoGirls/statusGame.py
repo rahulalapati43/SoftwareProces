@@ -1,3 +1,5 @@
+import math
+from random import *
 
 def statusGame(messageDictionary):
 
@@ -64,6 +66,12 @@ def statusGame(messageDictionary):
 
                 if countGT0 < 2:
                     outputDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
+
+    if (outputDictionary["gameStatus"] == "underway"):
+        winningTile = int(math.log(messageDictionary["tile"], 2))
+        for index in range(0,rowcolCountprod):
+            if (winningTile == messageDictionary["board"]["grid"][index]):
+                outputDictionary["gameStatus"] = "win"
 
 
 

@@ -1,3 +1,5 @@
+from IndigoGirls.swipeGame import swipeGame
+from random import *
 
 def recommendGame(messageDictionary):
 
@@ -8,7 +10,7 @@ def recommendGame(messageDictionary):
         messageDictionary["moves"] = 0
 
     elif (isinstance(messageDictionary["moves"], int) == False):
-        outputDictionary["gameStatus"] = "error: moves is not an integer"
+        outputDictionary["gameStatus"] = "error: invalid moves"
 
     elif (messageDictionary["moves"] < 0):
         outputDictionary["gameStatus"] = "error: moves must be GE 0"
@@ -68,6 +70,23 @@ def recommendGame(messageDictionary):
 
                         if countGT0 < 2:
                             outputDictionary["gameStatus"] = "error: No fewer than 2 items can be GT 0"
+
+    if(outputDictionary["gameStatus"] == "underway"):
+
+        inputDictionary = {}
+        boardDictionary = {}
+
+
+        if (messageDictionary["moves"] == 0):
+            directionList = ["left", "right", "up", "down"]
+            direction = sample(directionList,1)
+            inputDictionary["direction"] = direction[0]
+            boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
+            boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
+            boardDictionary["grid"] = messageDictionary["board"]["grid"]
+            inputDictionary["board"] = boardDictionary
+            outputDictionary = swipeGame(inputDictionary)
+
 
 
     return outputDictionary

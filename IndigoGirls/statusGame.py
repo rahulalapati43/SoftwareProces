@@ -36,5 +36,7 @@ def statusGame(messageDictionary):
     elif (messageDictionary["tile"] > 2 ** (messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"])):
         outputDictionary["gameStatus"] = "error: invalid tile value"
 
+    elif ("grid" not in messageDictionary["board"].keys()):
+        outputDictionary["gameStatus"] = "error: missing grid"
 
     return outputDictionary

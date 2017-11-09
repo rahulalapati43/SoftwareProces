@@ -9,13 +9,13 @@ class StatusGameTest(TestCase):
     #     outputDictionary = statusGame(inputDictionary)
     #     self.assertEquals(resultDictionary,outputDictionary)
 
-    def test100_020_shouldValidatetileGE2(self):
-        inputDictionary = {}
-        inputDictionary["tile"] = 0
-        resultDictionary = {}
-        resultDictionary["gameStatus"] = "error: invalid tile value"
-        outputDictionary = statusGame(inputDictionary)
-        self.assertEquals(resultDictionary,outputDictionary)
+    # def test100_020_shouldValidatetileGE2(self):
+    #     inputDictionary = {}
+    #     inputDictionary["tile"] = 0
+    #     resultDictionary = {}
+    #     resultDictionary["gameStatus"] = "error: invalid tile value"
+    #     outputDictionary = statusGame(inputDictionary)
+    #     self.assertEquals(resultDictionary,outputDictionary)
 
     def test200_010_shouldvalidateBoard(self):
         inputDictionary = {}

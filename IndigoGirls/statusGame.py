@@ -45,5 +45,10 @@ def statusGame(messageDictionary):
         if (rowcolCountprod != gridLength):
             outputDictionary["gameStatus"] = "error: invalid grid length"
 
+        elif (rowcolCountprod == gridLength):
+            for index in range(0,rowcolCountprod):
+                if (isinstance(messageDictionary["board"]["grid"][index],int) == False):
+                    outputDictionary["gameStatus"] = "error: invalid grid Elements"
+
 
     return outputDictionary

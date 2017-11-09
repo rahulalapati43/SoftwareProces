@@ -30,4 +30,7 @@ def statusGame(messageDictionary):
     elif (messageDictionary["board"]["rowCount"] <= 1 or messageDictionary["board"]["rowCount"] > 100):
         outputDictionary["gameStatus"] = "error: rowCount is out of bounds"
 
+    elif (("tile" in messageDictionary.keys()) and (messageDictionary["tile"] > 2 ** (messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]))):
+        outputDictionary["gameStatus"] = "error: invalid tile value"
+
     return outputDictionary

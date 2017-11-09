@@ -139,3 +139,15 @@ class StatusGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: rowCount is out of bounds"
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test500_010_shouldvalidatemissingGird(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 100
+        boardDictionary["rowCount"] = 100
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: missing grid"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

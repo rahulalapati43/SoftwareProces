@@ -207,3 +207,17 @@ class StatusGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: No fewer than two items can be GT 0"
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test600_010_shouldvalidateWin(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 16
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 4
+        boardDictionary["rowCount"] = 4
+        gridList = [0,0,0,0,0,4,0,0,0,0,1,0,0,0,1,0]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "win"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

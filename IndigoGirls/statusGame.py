@@ -6,6 +6,9 @@ def statusGame(messageDictionary):
     if "tile" not in messageDictionary.keys():
         messageDictionary["tile"] = 2048
 
+    elif (isinstance(messageDictionary["tile"],int) == False):
+        outputDictionary["gameStatus"] = "error: tile is not an integer"
+
     elif (messageDictionary["tile"] < 2):
         outputDictionary["gameStatus"] = "error: invalid tile value"
 
@@ -30,7 +33,7 @@ def statusGame(messageDictionary):
     elif (messageDictionary["board"]["rowCount"] <= 1 or messageDictionary["board"]["rowCount"] > 100):
         outputDictionary["gameStatus"] = "error: rowCount is out of bounds"
 
-    elif (("tile" in messageDictionary.keys()) and (messageDictionary["tile"] > 2 ** (messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]))):
+    elif (("tile" in messageDictionary.keys()) and (isinstance(messageDictionary["tile"],int) == True) and (messageDictionary["tile"] > 2 ** (messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]))):
         outputDictionary["gameStatus"] = "error: invalid tile value"
 
     return outputDictionary

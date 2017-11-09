@@ -26,4 +26,14 @@ class StatusGameTest(TestCase):
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
 
+    def test300_010_shouldvalidatemissingcolumnCount(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2
+        boardDictionary = {}
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: missing columnCount"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
+
 

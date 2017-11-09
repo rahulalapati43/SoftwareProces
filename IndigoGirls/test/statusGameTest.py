@@ -165,3 +165,17 @@ class StatusGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: invalid grid length"
         outputDictionary = statusGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test500_030_shouldvalidateGridElementsInt(self):
+        inputDictionary = {}
+        inputDictionary["tile"] = 2
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 2
+        boardDictionary["rowCount"] = 2
+        gridList = [0,1,1,'0']
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: invalid grid Elements"
+        outputDictionary = statusGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

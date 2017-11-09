@@ -17,6 +17,8 @@ class StatusGameTest(TestCase):
     #     outputDictionary = statusGame(inputDictionary)
     #     self.assertEquals(resultDictionary,outputDictionary)
 
+
+
     def test200_010_shouldvalidateBoard(self):
         inputDictionary = {}
         inputDictionary["tile"] = 2

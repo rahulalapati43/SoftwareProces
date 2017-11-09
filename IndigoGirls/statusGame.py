@@ -21,5 +21,13 @@ def statusGame(messageDictionary):
     elif (messageDictionary["board"]["columnCount"] <= 1 or messageDictionary["board"]["columnCount"] > 100):
         outputDictionary["gameStatus"] = "error: columnCount is out of bounds"
 
+    elif "rowCount" not in messageDictionary["board"].keys():
+        outputDictionary["gameStatus"] = "error: missing rowCount"
+
+    elif (isinstance(messageDictionary["board"]["rowCount"],int) == False):
+        outputDictionary["gameStatus"] ="error: rowCount is not an integer"
+
+    elif (messageDictionary["board"]["rowCount"] <= 1 or messageDictionary["board"]["rowCount"] > 100):
+        outputDictionary["gameStatus"] = "error: rowCount is out of bounds"
 
     return outputDictionary

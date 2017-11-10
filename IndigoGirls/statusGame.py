@@ -69,6 +69,7 @@ def statusGame(messageDictionary):
 
 
     if (outputDictionary["gameStatus"] == "underway"):
+        rowcolCountprod = messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]
         winningTile = int(math.log(messageDictionary["tile"], 2))
         for index in range(0,rowcolCountprod):
             if (messageDictionary["board"]["grid"][index]  >= winningTile):

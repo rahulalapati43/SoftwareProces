@@ -2,6 +2,7 @@ import json
 from initializeGame import *
 from swipeGame import *
 from recommendGame import *
+from statusGame import *
 
 def dispatch(messageJson=None):
     """
@@ -50,6 +51,8 @@ def dispatch(messageJson=None):
         resultDictionary = swipeGame(messageDictionary)
     elif(messageDictionary[u"op"] == u"recommend"):
         resultDictionary = recommendGame(messageDictionary)
+    elif (messageDictionary[u"op"] == u"status"):
+        resultDictionary = statusGame(messageDictionary)
     else:
         resultDictionary = buildErrorString('op is invalid')
 

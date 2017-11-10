@@ -219,3 +219,53 @@ class RecommendGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: No fewer than 2 items can be GT 0"
         outputDictionary = recommendGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test600_010_shouldvalidatemoves0(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 0
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 4
+        boardDictionary["rowCount"] = 4
+        gridList = [0,0,0,1,0,0,0,1,2,2,0,0,1,0,2,2]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertTrue(outputDictionary["score"] == 16 or outputDictionary["score"] == 4)
+
+    def test600_020_shouldvalidatemoves1(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 1
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 4
+        boardDictionary["rowCount"] = 4
+        gridList = [0,0,0,1,0,0,0,1,2,2,0,0,1,0,2,2]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertTrue(outputDictionary["score"] == 16)
+
+    def test600_030_shouldvalidatemoves2(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 2
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 4
+        boardDictionary["rowCount"] = 4
+        gridList = [0,0,0,1,0,0,0,1,2,2,0,0,1,0,2,2]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        outputDictionary = recommendGame(inputDictionary)
+        self.assertTrue(outputDictionary["score"] == 20 or outputDictionary["score"] == 36 or outputDictionary["score"] == 40)
+
+    def test600_040_shouldvalidatenotilescanbeshifted(self):
+        inputDictionary = {}
+        inputDictionary["moves"] = 1
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 4
+        boardDictionary["rowCount"] = 4
+        gridList = [1,2,3,4,4,3,2,1,1,2,3,4,4,3,2,1]
+        boardDictionary["grid"] = gridList
+        inputDictionary["board"] = boardDictionary
+        outputDictionary = recommendGame(inputDictionary)
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: no tiles can be shifted in 1 move"
+        self.assertEquals(resultDictionary,outputDictionary)

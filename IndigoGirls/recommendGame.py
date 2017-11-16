@@ -1,4 +1,5 @@
 from IndigoGirls.swipeGame import swipeGame
+from IndigoGirls.callSwipeGame import callSwipeGame
 from random import *
 
 def recommendGame(messageDictionary):
@@ -80,6 +81,7 @@ def recommendGame(messageDictionary):
         if (messageDictionary["moves"] == 0):
             directionList = ["left", "right", "up", "down"]
             direction = sample(directionList,1)
+            inputDictionary["op"] = "swipe"
             inputDictionary["direction"] = direction[0]
             boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
             boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
@@ -98,65 +100,207 @@ def recommendGame(messageDictionary):
                     outputDictionary = swipeGame(inputDictionary)
                     directionList.remove(directionList[0])
 
-        elif (messageDictionary["moves"] > 0):
+        elif (messageDictionary["moves"] == 1):
 
+            outputList = []
             boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
             boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
             boardDictionary["grid"] = messageDictionary["board"]["grid"]
             inputDictionary["board"] = boardDictionary
             inputDictionary["board"] = boardDictionary
-            outputDictionary["score"] = 0
+            inputDictionary["score"] = 0
+            inputDictionary["op"] = "recommend"
+            leftDictionary,rightDictionary,upDictionary, downDictionary = callSwipeGame(inputDictionary)
 
-            for move in range(0, messageDictionary["moves"]):
-                scoreList = []
+            outputList.append(leftDictionary)
+            outputList.append(rightDictionary)
+            outputList.append(upDictionary)
+            outputList.append(downDictionary)
+
+            scoresList = []
+            leftScore = 0
+            rightScore = 0
+            upScore = 0
+            downScore = 0
+
+            inputDictionary = outputList[0]
+            if (inputDictionary["gameStatus"] == "underway"):
+                scoresList.append(inputDictionary["score"])
+                leftScore = inputDictionary["score"]
+
+            inputDictionary = outputList[1]
+            if (inputDictionary["gameStatus"] == "underway"):
+                scoresList.append(inputDictionary["score"])
+                rightScore = inputDictionary["score"]
+
+            inputDictionary = outputList[2]
+            if (inputDictionary["gameStatus"] == "underway"):
+                scoresList.append(inputDictionary["score"])
+                upScore = inputDictionary["score"]
+
+            inputDictionary = outputList[3]
+            if (inputDictionary["gameStatus"] == "underway"):
+                scoresList.append(inputDictionary["score"])
+                downScore = inputDictionary["score"]
+
+            if (len(scoresList) != 0):
                 directionList = []
-                inputDictionary["direction"] = "left"
-                leftDictionary = swipeGame(inputDictionary)
-                if (leftDictionary["gameStatus"] == "underway"):
-                    scoreList.append(leftDictionary["score"] + outputDictionary["score"])
+                maxScore = max(scoresList)
+                if (maxScore == leftScore):
+                    directionList.append("left")
 
-                inputDictionary["direction"] = "right"
-                rightDictionary = swipeGame(inputDictionary)
-                if (rightDictionary["gameStatus"] == "underway"):
-                    scoreList.append(rightDictionary["score"] + outputDictionary["score"])
+                if (maxScore == rightScore):
+                    directionList.append("right")
 
-                inputDictionary["direction"] = "up"
-                upDictionary = swipeGame(inputDictionary)
-                if (upDictionary["gameStatus"] == "underway"):
-                    scoreList.append(upDictionary["score"] + outputDictionary["score"])
+                if (maxScore == upScore):
+                    directionList.append("up")
 
-                inputDictionary["direction"] = "down"
-                downDictionary = swipeGame(inputDictionary)
-                if (downDictionary["gameStatus"] == "underway"):
-                    scoreList.append(downDictionary["score"] + outputDictionary["score"])
+                if (maxScore == downScore):
+                    directionList.append("down")
 
-                if (len(scoreList) != 0):
-                    maxScore = max(scoreList)
-
-                if (leftDictionary["gameStatus"] == "underway"):
-                    if (maxScore == leftDictionary["score"] + outputDictionary["score"]):
-                        directionList.append("left")
-
-                if (rightDictionary["gameStatus"] == "underway"):
-                    if (maxScore == rightDictionary["score"] + outputDictionary["score"]):
-                        directionList.append("right")
-                if (upDictionary["gameStatus"] == "underway"):
-                    if (maxScore == upDictionary["score"] + outputDictionary["score"]):
-                        directionList.append("up")
-
-                if (downDictionary["gameStatus"] == "underway"):
-                    if (maxScore == downDictionary["score"] + outputDictionary["score"]):
-                        directionList.append("down")
-
-                if (len(directionList) != 0):
+                if (len(directionList) > 1):
                     direction = sample(directionList, 1)
                     inputDictionary["direction"] = direction[0]
-                    outputDictionary = swipeGame(inputDictionary)
-                    outputDictionary["score"] = maxScore
-                    inputDictionary["board"] = outputDictionary["board"]
                 else:
+                    inputDictionary["direction"] = directionList[0]
+
+                boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
+                boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
+                boardDictionary["grid"] = messageDictionary["board"]["grid"]
+                inputDictionary["board"] = boardDictionary
+                inputDictionary["board"] = boardDictionary
+                inputDictionary["op"] = "swipe"
+                outputDictionary = swipeGame(inputDictionary)
+            else:
+                outputDictionary["gameStatus"] = "error: no tiles can be shifted on a subsequent swipe"
+
+
+        elif (messageDictionary["moves"] > 1):
+
+            outputList = []
+            boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
+            boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
+            boardDictionary["grid"] = messageDictionary["board"]["grid"]
+            inputDictionary["board"] = boardDictionary
+            inputDictionary["board"] = boardDictionary
+            inputDictionary["score"] = 0
+            inputDictionary["op"] = "recommend"
+            leftDictionary, rightDictionary, upDictionary, downDictionary = callSwipeGame(inputDictionary)
+
+            outputList.append(leftDictionary)
+            outputList.append(rightDictionary)
+            outputList.append(upDictionary)
+            outputList.append(downDictionary)
+
+            start = 0
+            noofElements = 0
+            for move in range(1,messageDictionary["moves"]):
+                noofElements = noofElements + ((2 ** move) ** 2)
+                for element in range(start,noofElements):
+                    inputDictionary = outputList[element]
+                    inputDictionary = dict(inputDictionary)
+                    if (inputDictionary["gameStatus"] != "error: no tiles can be shifted"):
+                        inputDictionary["op"] = "recommend"
+                    leftDictionary, rightDictionary, upDictionary, downDictionary = callSwipeGame(inputDictionary)
+                    outputList.append(leftDictionary)
+                    outputList.append(rightDictionary)
+                    outputList.append(upDictionary)
+                    outputList.append(downDictionary)
+                start = noofElements
+
+            leftScores = []
+            rightScores = []
+            upScores = []
+            downScores = []
+
+            start = 4
+            for move in range(1,messageDictionary["moves"]):
+                noofElements = (2 ** move) ** 2
+                lower = start
+                upper = (lower + noofElements)
+                if (move == (messageDictionary["moves"] - 1)):
+                    for element in range(lower,upper):
+                        inputDictionary = outputList[element]
+                        if (inputDictionary["gameStatus"] == "underway"):
+                            leftScores.append(inputDictionary["score"])
+
+                lower = upper
+                upper = (lower + noofElements)
+                if (move == (messageDictionary["moves"] - 1)):
+                    for element in range(lower,upper):
+                        inputDictionary = outputList[element]
+                        if (inputDictionary["gameStatus"] == "underway"):
+                            rightScores.append(inputDictionary["score"])
+
+                lower = upper
+                upper = (lower + noofElements)
+                if (move == (messageDictionary["moves"] - 1)):
+                    for element in range(lower,upper):
+                        inputDictionary = outputList[element]
+                        if (inputDictionary["gameStatus"] == "underway"):
+                            upScores.append(inputDictionary["score"])
+
+                lower = upper
+                upper = (lower + noofElements)
+                if (move == (messageDictionary["moves"] - 1)):
+                    for element in range(lower,upper):
+                        inputDictionary = outputList[element]
+                        if (inputDictionary["gameStatus"] == "underway"):
+                            downScores.append(inputDictionary["score"])
+
+                start = upper
+
+            if ((len(leftScores) == 0) and (len(rightScores) == 0) and (len(upScores) == 0) and (len(downScores) == 0) ):
+                outputDictionary["gameStatus"] = "error: no tiles can be shifted on a subsequent swipe"
+            else:
+                scoresList = []
+                leftScore = 0
+                rightScore = 0
+                upScore = 0
+                downScore = 0
+                if (len(leftScores) != 0):
+                    leftScore = max(leftScores)
+                    scoresList.append(leftScore)
+
+                if (len(rightScores) != 0):
+                    rightScore = max(rightScores)
+                    scoresList.append(rightScore)
+
+                if (len(upScores) != 0):
+                    upScore = max(upScores)
+                    scoresList.append(upScore)
+
+                if (len(downScores) != 0):
+                    downScore = max(downScores)
+                    scoresList.append(downScore)
+
+                if (len(scoresList) != 0):
+                    directionList = []
+                    maxScore = max(scoresList)
+                    if (maxScore == leftScore):
+                        directionList.append("left")
+
+                    if (maxScore == rightScore):
+                        directionList.append("right")
+
+                    if (maxScore == upScore):
+                        directionList.append("up")
+
+                    if (maxScore == downScore):
+                        directionList.append("down")
+
+                    if (len(directionList) > 1):
+                        direction = sample(directionList, 1)
+                        inputDictionary["direction"] = direction[0]
+                    else:
+                        inputDictionary["direction"] = directionList[0]
+
+                    boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
+                    boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
+                    boardDictionary["grid"] = messageDictionary["board"]["grid"]
+                    inputDictionary["board"] = boardDictionary
+                    inputDictionary["board"] = boardDictionary
+                    inputDictionary["op"] = "swipe"
                     outputDictionary = swipeGame(inputDictionary)
-                    if (outputDictionary["gameStatus"] == "error: no tiles can be shifted"):
-                        outputDictionary["gameStatus"] = outputDictionary["gameStatus"] + ' ' + "in" + ' ' + str(move + 1) + ' ' + "move"
 
     return outputDictionary

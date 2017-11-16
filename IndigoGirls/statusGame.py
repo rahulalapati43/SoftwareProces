@@ -83,6 +83,7 @@ def statusGame(messageDictionary):
             boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
             boardDictionary["grid"] = messageDictionary["board"]["grid"]
             inputDictionary["board"] = boardDictionary
+            inputDictionary["op"] = "status"
 
             inputDictionary["direction"] = "left"
             leftDictionary = swipeGame(inputDictionary)

@@ -447,11 +447,11 @@ class SwipeGameTest(TestCase):
             boardDictionary = {}
             boardDictionary["rowCount"] = 2
             boardDictionary["columnCount"] = 2
-            gridList = [17,16,0,0]
+            gridList = [5,4,0,0]
             boardDictionary["grid"] = gridList
             inputDictionary["board"] = boardDictionary
             resultDictionary = {}
-            resultDictionary["gameStatus"] = "error: Each item in the grid must be LE 2**(rowCount * columnCount)"
+            resultDictionary["gameStatus"] = "error: Each item in the grid must be LE (rowCount * columnCount)"
             outputDictionary = swipeGame(inputDictionary)
             self.assertEquals(resultDictionary,outputDictionary)
 
@@ -463,10 +463,10 @@ class SwipeGameTest(TestCase):
             boardDictionary = {}
             boardDictionary["columnCount"] = 2
             boardDictionary["rowCount"] = 2
-            gridList = [0,1,17,0]
+            gridList = [0,1,5,0]
             boardDictionary["grid"] = gridList
             inputDictionary["board"] = boardDictionary
             resultDictionary = {}
-            resultDictionary["gameStatus"] = "error: Each item in the grid must be LE 2**(rowCount * columnCount)"
+            resultDictionary["gameStatus"] = "error: Each item in the grid must be LE (rowCount * columnCount)"
             outputDictionary = swipeGame(inputDictionary)
             self.assertEquals(resultDictionary, outputDictionary)

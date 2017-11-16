@@ -77,10 +77,10 @@ def swipeGame(messageDictionary):
 
                                 if (outputDictionary["gameStatus"] != "error: Each item in the grid must be GE 0"):
                                     for index in range(0, i):
-                                        if (messageDictionary["board"]["grid"][index] > 2**i):
-                                            outputDictionary["gameStatus"] = "error: Each item in the grid must be LE 2**(rowCount * columnCount)"
+                                        if (messageDictionary["board"]["grid"][index] > i):
+                                            outputDictionary["gameStatus"] = "error: Each item in the grid must be LE (rowCount * columnCount)"
 
-                                    if (outputDictionary["gameStatus"] != "error: Each item in the grid must be LE 2**(rowCount * columnCount)"):
+                                    if (outputDictionary["gameStatus"] != "error: Each item in the grid must be LE (rowCount * columnCount)"):
                                         count = 0
                                         for index in range(0, i):
                                             if (messageDictionary["board"]["grid"][index] > 0):
@@ -141,11 +141,11 @@ def swipeGame(messageDictionary):
 
             #if compareResult is non zero then swipe is successful, else no tiles can be shifted
             if (compareResult != 0):
+                if (messageDictionary["op"] == "swipe"):
+                    while (outList[position] != 0):
+                        position = randint(0, x - 1)
 
-                while (outList[position] != 0):
-                    position = randint(0, x - 1)
-
-                outList[position] = a[0]
+                    outList[position] = a[0]
 
                 outputDictionary["score"] = score
                 boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
@@ -207,11 +207,11 @@ def swipeGame(messageDictionary):
             compareResult = cmp(messageDictionary["board"]["grid"], outList)
 
             if (compareResult != 0):
+                if (messageDictionary["op"] == "swipe"):
+                    while (outList[position] != 0):
+                        position = randint(0, x - 1)
 
-                while (outList[position] != 0):
-                    position = randint(0, x - 1)
-
-                outList[position] = a[0]
+                    outList[position] = a[0]
 
                 outputDictionary["score"] = score
 
@@ -260,11 +260,11 @@ def swipeGame(messageDictionary):
             compareResult = cmp(messageDictionary["board"]["grid"], outList)
 
             if (compareResult != 0):
+                if (messageDictionary["op"] == "swipe"):
+                    while (outList[position] != 0):
+                        position = randint(0, x - 1)
 
-                while (outList[position] != 0):
-                    position = randint(0, x - 1)
-
-                outList[position] = a[0]
+                    outList[position] = a[0]
 
                 outputDictionary["score"] = score
                 boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
@@ -311,11 +311,11 @@ def swipeGame(messageDictionary):
             compareResult = cmp(messageDictionary["board"]["grid"], outList)
 
             if (compareResult != 0):
+                if (messageDictionary["op"] == "swipe"):
+                    while (outList[position] != 0):
+                        position = randint(0, x - 1)
 
-                while (outList[position] != 0):
-                    position = randint(0, x - 1)
-
-                outList[position] = a[0]
+                    outList[position] = a[0]
 
                 outputDictionary["score"] = score
                 boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]

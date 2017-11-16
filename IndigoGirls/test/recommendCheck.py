@@ -100,7 +100,7 @@ validJson = '{"op": "recommend", "moves": 3, "board": {"columnCount": 4, "rowCou
 validResult = dispatch.dispatch(validJson)
 print(("Input string:\t{0}\nOutput string:\t{1}\n").format(validJson, validResult))
 
-validJson = '{"op": "recommend", "moves": 12, "board": {"columnCount": 4, "rowCount": 4, "grid": [3,3,3,3,1,1,0,2,0,0,1,0,0,0,0,0]}}'
+validJson = '{"op": "recommend", "moves": 2, "board": {"columnCount": 4, "rowCount": 4, "grid": [3,3,3,3,1,1,0,2,0,0,1,0,0,0,0,0]}}'
 validResult = dispatch.dispatch(validJson)
 print(("Input string:\t{0}\nOutput string:\t{1}\n").format(validJson, validResult))
 

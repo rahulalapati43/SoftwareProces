@@ -14,7 +14,6 @@ def recommendGame(messageDictionary):
         inputDictionary = {}
         boardDictionary = {}
 
-
         if (messageDictionary["moves"] == 0):
             directionList = ["left", "right", "up", "down"]
             direction = sample(directionList,1)
@@ -110,7 +109,6 @@ def recommendGame(messageDictionary):
                 outputDictionary = swipeGame(inputDictionary)
             else:
                 outputDictionary["gameStatus"] = "error: no tiles can be shifted on a subsequent swipe"
-
 
         elif (messageDictionary["moves"] > 1):
 
@@ -242,7 +240,6 @@ def recommendGame(messageDictionary):
 
     return outputDictionary
 
-
 def validateRecommend(messageDictionary, outputDictionary):
 
     if "moves" not in messageDictionary.keys():
@@ -258,7 +255,6 @@ def validateRecommend(messageDictionary, outputDictionary):
         outputDictionary = validateBoard(messageDictionary, outputDictionary)
 
     return outputDictionary
-
 
 def validateBoard(messageDictionary, outputDictionary):
 

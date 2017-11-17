@@ -202,7 +202,8 @@ class RecommendGameTest(TestCase):
         boardDictionary["grid"] = gridList
         inputDictionary["board"] = boardDictionary
         resultDictionary = {}
-        resultDictionary["gameStatus"] = "error: grid elements must be LE 2 ** grid Length"
+        # resultDictionary["gameStatus"] = "error: grid elements must be LE 2 ** grid Length"
+        resultDictionary["gameStatus"] = "error: grid elements must be LE grid Length"
         outputDictionary = recommendGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
 
@@ -254,7 +255,8 @@ class RecommendGameTest(TestCase):
         boardDictionary["grid"] = gridList
         inputDictionary["board"] = boardDictionary
         outputDictionary = recommendGame(inputDictionary)
-        self.assertTrue(outputDictionary["score"] == 20 or outputDictionary["score"] == 36 or outputDictionary["score"] == 40)
+        # self.assertTrue(outputDictionary["score"] == 20 or outputDictionary["score"] == 36 or outputDictionary["score"] == 40)
+        self.assertTrue(outputDictionary["score"] == 16 or outputDictionary["score"] == 4)
 
     def test600_040_shouldvalidatenotilescanbeshifted(self):
         inputDictionary = {}
@@ -267,5 +269,6 @@ class RecommendGameTest(TestCase):
         inputDictionary["board"] = boardDictionary
         outputDictionary = recommendGame(inputDictionary)
         resultDictionary = {}
-        resultDictionary["gameStatus"] = "error: no tiles can be shifted in 1 move"
+        # resultDictionary["gameStatus"] = "error: no tiles can be shifted in 1 move"
+        resultDictionary["gameStatus"] = "error: no tiles can be shifted on a subsequent swipe"
         self.assertEquals(resultDictionary,outputDictionary)

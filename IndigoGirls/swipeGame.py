@@ -279,6 +279,7 @@ def validateBoard(messageDictionary, outputDictionary):
     # validating board
     if "board" not in messageDictionary.keys():
         outputDictionary["gameStatus"] = "error: missing board"
+
     if "board" in messageDictionary.keys():
         # validating columnCount
         if "columnCount" not in messageDictionary["board"]:

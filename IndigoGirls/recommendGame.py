@@ -254,7 +254,8 @@ def validateRecommend(messageDictionary, outputDictionary):
     elif (messageDictionary["moves"] < 0):
         outputDictionary["gameStatus"] = "error: moves must be GE 0"
 
-    outputDictionary = validateBoard(messageDictionary, outputDictionary)
+    if (outputDictionary["gameStatus"] == "underway"):
+        outputDictionary = validateBoard(messageDictionary, outputDictionary)
 
     return outputDictionary
 

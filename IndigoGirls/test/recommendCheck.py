@@ -111,3 +111,4 @@ print(("Input string:\t{0}\nOutput string:\t{1}\n").format(validJson, validResul
 validJson = '{"op": "recommend", "moves": 5, "board": {"columnCount": 2, "rowCount": 2, "grid": [1,1,2,2]}}'
 validResult = dispatch.dispatch(validJson)
 print(("Input string:\t{0}\nOutput string:\t{1}\n").format(validJson, validResult))
+

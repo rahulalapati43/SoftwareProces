@@ -2,23 +2,37 @@ import math
 from IndigoGirls.swipeGame import swipeGame
 
 def statusGame(messageDictionary):
+    """
+                     statusGame is a function and is invoked in dispatch when the operation to be performed is status of
+                     the grid based on the winning tile.
+                :param messageDictionary: Is a dictionary which consists the following name value pairs: operation (op), tile,
+                                         board dictionary which consists of row count (rowCount), column count (columnCount) and grid.
+                                         All the params are mandatory.
+                :return:                 A dictionary which consists of the following name value pairs: game status.
+                """
 
+    #output dictionary is returned to dispatch after the gameStatus is determined
     outputDictionary = {}
     outputDictionary["gameStatus"] = "underway"
 
+    #call to validateStatus method to validate the status input dictionary
     outputDictionary = validateStatus(messageDictionary, outputDictionary)
 
+    #if all the elements of the status input dictionary are validated
     if (outputDictionary["gameStatus"] == "underway"):
+        #to check if any of the grid element matches the winning tile
         rowcolCountprod = messageDictionary["board"]["rowCount"] * messageDictionary["board"]["columnCount"]
         winningTile = int(math.log(messageDictionary["tile"], 2))
         for index in range(0,rowcolCountprod):
             if (messageDictionary["board"]["grid"][index]  >= winningTile):
                 outputDictionary["gameStatus"] = "win"
 
+        #if any of the grid element's value doesn't meet the winning tile's value
         if (outputDictionary["gameStatus"] != "win"):
             inputDictionary = {}
             boardDictionary = {}
 
+            #logic to swipe the grid in all the possible directions
             boardDictionary["columnCount"] = messageDictionary["board"]["columnCount"]
             boardDictionary["rowCount"] = messageDictionary["board"]["rowCount"]
             boardDictionary["grid"] = messageDictionary["board"]["grid"]
@@ -37,6 +51,7 @@ def statusGame(messageDictionary):
             inputDictionary["direction"] = "down"
             downDictionary = swipeGame(inputDictionary)
 
+            #if the grid element doesn't match winning tile and the grid cannot be swiped in any possible direction
             if ((leftDictionary["gameStatus"] == "error: no tiles can be shifted") and (rightDictionary["gameStatus"] == "error: no tiles can be shifted") and
                     (upDictionary["gameStatus"] == "error: no tiles can be shifted") and (downDictionary["gameStatus"] == "error: no tiles can be shifted")):
                 outputDictionary["gameStatus"] = "lose"
@@ -48,6 +63,7 @@ def statusGame(messageDictionary):
     return outputDictionary
 
 
+#method to validate status input dictionary
 def validateStatus(messageDictionary, outputDictionary):
 
     outputDictionary = validateBoard(messageDictionary, outputDictionary)
@@ -69,7 +85,7 @@ def validateStatus(messageDictionary, outputDictionary):
 
     return outputDictionary
 
-
+#method to validate board in status input dictionary
 def validateBoard(messageDictionary, outputDictionary):
 
     if "board" not in messageDictionary.keys():

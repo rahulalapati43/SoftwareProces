@@ -17,6 +17,7 @@ def swipeGame(messageDictionary):
     outputDictionary = {}
     outputDictionary["gameStatus"] = "underway"
 
+    #call to validateSwipe to validate the input dictionary
     outputDictionary = validateSwipe(messageDictionary, outputDictionary)
 
     #if every element of the input dictionary is validated
@@ -258,7 +259,7 @@ def swipeGame(messageDictionary):
 
     return outputDictionary
 
-
+#method to validate input dictionary
 def validateSwipe(messageDictionary, outputDictionary):
     # validating direction
     if "direction" not in messageDictionary.keys():
@@ -274,7 +275,7 @@ def validateSwipe(messageDictionary, outputDictionary):
 
     return outputDictionary
 
-
+#method to validate board in input dictionary
 def validateBoard(messageDictionary, outputDictionary):
     # validating board
     if "board" not in messageDictionary.keys():

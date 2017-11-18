@@ -2,6 +2,7 @@ from IndigoGirls.swipeGame import swipeGame
 
 def callSwipeGame(messageDictionary):
 
+#method to initiate a call to swipeGame method by taking the recommend input dictionary and swipe it in all the possible directions
     if (messageDictionary != {'gameStatus': 'error: no tiles can be shifted'}):
         messageDictionary["direction"] = "left"
         leftDict = swipeGame(messageDictionary)

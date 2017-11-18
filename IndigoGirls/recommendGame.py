@@ -3,17 +3,31 @@ from IndigoGirls.callSwipeGame import callSwipeGame
 from random import *
 
 def recommendGame(messageDictionary):
+    """
+                 recommendGame is a function and is invoked in dispatch when the operation to be performed is recommend
+                 the next possible swipe of grid based on the highest score.
+            :param messageDictionary: Is a dictionary which consists the following name value pairs: operation (op), moves,
+                                     board dictionary which consists of row count (rowCount), column count (columnCount) and grid.
+                                     All the params are mandatory.
+            :return:                 A dictionary which consists of the following name value pairs: score, board, game status.
+                                     The board consists of another dictionary which consists of 3 name value pairs:
+                                     rowCount, columnCount & grid.
+            """
 
+    #output dictionary is returned to dispatch after the caluclations are done
     outputDictionary = {}
     outputDictionary["gameStatus"] = "underway"
 
+    #call to validateRecommend to validate the input dictionary
     outputDictionary = validateRecommend(messageDictionary, outputDictionary)
 
+    #if every element of the input dictionary are validated
     if(outputDictionary["gameStatus"] == "underway"):
 
         inputDictionary = {}
         boardDictionary = {}
 
+        #if number of lookahead moves is 0
         if (messageDictionary["moves"] == 0):
             directionList = ["left", "right", "up", "down"]
             direction = sample(directionList,1)
@@ -36,6 +50,7 @@ def recommendGame(messageDictionary):
                     outputDictionary = swipeGame(inputDictionary)
                     directionList.remove(directionList[0])
 
+        #if number of lookahead moves is 1
         elif (messageDictionary["moves"] == 1):
 
             outputList = []
@@ -110,6 +125,7 @@ def recommendGame(messageDictionary):
             else:
                 outputDictionary["gameStatus"] = "error: no tiles can be shifted on a subsequent swipe"
 
+        #if number of lookahead moves is GT 1
         elif (messageDictionary["moves"] > 1):
 
             outputList = []
@@ -240,6 +256,7 @@ def recommendGame(messageDictionary):
 
     return outputDictionary
 
+#method to validate input dictionary for recommend
 def validateRecommend(messageDictionary, outputDictionary):
 
     if "moves" not in messageDictionary.keys():
@@ -256,6 +273,7 @@ def validateRecommend(messageDictionary, outputDictionary):
 
     return outputDictionary
 
+#method to validate board in the recommend input dictionary
 def validateBoard(messageDictionary, outputDictionary):
 
     if "board" not in messageDictionary.keys():

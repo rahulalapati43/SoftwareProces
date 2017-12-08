@@ -8,6 +8,9 @@ def predictGame(messageDictionary):
                   messageDictionary["direction"].lower() != "left" and messageDictionary["direction"].lower() != "right"):
         outputDictionary["gameStatus"] = "error: invalid direction"
 
+    elif "moves" not in messageDictionary.keys():
+        messageDictionary["moves"] = 1
+
     return outputDictionary
 
 

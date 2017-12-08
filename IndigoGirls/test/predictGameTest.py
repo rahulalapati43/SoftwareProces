@@ -18,3 +18,13 @@ class predictGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: invalid direction"
         outputDictionary = predictGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test100_030_shouldValidatemovestype(self):
+        inputDictionary = {}
+        inputDictionary["op"] = "predict"
+        inputDictionary["direction"] = "LEft"
+        inputDictionary["moves"] = '1'
+        resultDictionary["gameStatus"] = {"error: invalid moves"}
+        outputDictionary = predictGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)
+

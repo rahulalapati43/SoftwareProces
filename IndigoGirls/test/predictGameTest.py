@@ -48,3 +48,14 @@ class predictGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: missing board"
         outputDictionary = predictGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test200_020_shouldValidatemissingcolumnCount(self):
+        inputDictionary = {}
+        inputDictionary["op"] = "predict"
+        inputDictionary["direction"] = "LEft"
+        inputDictionary["moves"] = 1
+        inputDictionary["board"] = {}
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: missing columnCount"
+        outputDictionary = predictGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

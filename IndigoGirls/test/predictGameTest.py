@@ -59,3 +59,16 @@ class predictGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: missing columnCount"
         outputDictionary = predictGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test200_030_shouldValidateinvalidcolumnCount(self):
+        inputDictionary = {}
+        inputDictionary["op"] = "predict"
+        inputDictionary["direction"] = "LEft"
+        inputDictionary["moves"] = 1
+        boardDictionary = {}
+        boardDictionary["columnCount"] = '1'
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: columnCount is not an integer"
+        outputDictionary = predictGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

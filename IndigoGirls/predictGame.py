@@ -1,4 +1,9 @@
 def predictGame(messageDictionary):
-    pass
+    outputDictionary = {}
+
+    if "direction" not in messageDictionary.keys():
+        outputDictionary["gameStatus"] = "error: missing direction"
+
+    return outputDictionary
 
 

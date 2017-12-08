@@ -24,7 +24,8 @@ class predictGameTest(TestCase):
         inputDictionary["op"] = "predict"
         inputDictionary["direction"] = "LEft"
         inputDictionary["moves"] = '1'
-        resultDictionary["gameStatus"] = {"error: invalid moves"}
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: invalid moves"
         outputDictionary = predictGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
 

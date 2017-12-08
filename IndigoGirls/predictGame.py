@@ -11,6 +11,9 @@ def predictGame(messageDictionary):
     elif "moves" not in messageDictionary.keys():
         messageDictionary["moves"] = 1
 
+    elif (isinstance(messageDictionary["moves"],int) == False):
+        outputDictionary["gameStatus"] = "error: invalid moves"
+
     return outputDictionary
 
 

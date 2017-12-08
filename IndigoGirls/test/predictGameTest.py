@@ -38,3 +38,13 @@ class predictGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: moves must be GE 1"
         outputDictionary = predictGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test200_010_shouldValidatemissingBoard(self):
+        inputDictionary = {}
+        inputDictionary["op"] = "predict"
+        inputDictionary["direction"] = "LEft"
+        inputDictionary["moves"] = 1
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: missing board"
+        outputDictionary = predictGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

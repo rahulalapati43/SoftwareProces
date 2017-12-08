@@ -26,8 +26,9 @@ def predictGame(messageDictionary):
     elif (isinstance(messageDictionary["board"]["columnCount"],int) == False):
         outputDictionary["gameStatus"] = "error: columnCount is not an integer"
 
-    elif (messageDictionary["board"]["columnCount"] <= 1):
+    elif ((messageDictionary["board"]["columnCount"] <= 1) or (messageDictionary["board"]["columnCount"] > 100)):
         outputDictionary["gameStatus"] = "error: columnCount is out of bounds"
+
 
     return outputDictionary
 

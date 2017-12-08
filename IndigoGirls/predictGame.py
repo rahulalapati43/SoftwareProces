@@ -14,7 +14,8 @@ def predictGame(messageDictionary):
     elif (isinstance(messageDictionary["moves"],int) == False):
         outputDictionary["gameStatus"] = "error: invalid moves"
 
-
+    elif (messageDictionary["moves"] < 1):
+        outputDictionary["gameStatus"] = "error: moves must be GE 1"
 
     return outputDictionary
 

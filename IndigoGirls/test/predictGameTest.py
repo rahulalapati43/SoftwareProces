@@ -29,3 +29,12 @@ class predictGameTest(TestCase):
         outputDictionary = predictGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
 
+    def test100_040_shouldValidatemovesGE1(self):
+        inputDictionary = {}
+        inputDictionary["op"] = "predict"
+        inputDictionary["direction"] = "LEft"
+        inputDictionary["moves"] = 0
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: moves must be GE 1"
+        outputDictionary = predictGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

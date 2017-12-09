@@ -1,5 +1,7 @@
 def predictGame(messageDictionary):
+
     outputDictionary = {}
+    outputDictionary["gameStatus"] = "underway"
 
     if "direction" not in messageDictionary.keys():
         outputDictionary["gameStatus"] = "error: missing direction"
@@ -48,6 +50,16 @@ def predictGame(messageDictionary):
         for index in range(0, len(messageDictionary["board"]["grid"])):
             if (isinstance(messageDictionary["board"]["grid"][index],int) == False):
                 outputDictionary["gameStatus"] = "error: invalid grid elements"
+
+        if (outputDictionary["gameStatus"] != "error: invalid grid elements"):
+            for index in range(0, len(messageDictionary["board"]["grid"])):
+                if (messageDictionary["board"]["grid"][index] < 0):
+                    outputDictionary["gameStatus"] = "error: grid elements must be GE 0"
+
+            if (outputDictionary["gameStatus"] != "error: grid elements must be GE 0"):
+                for index in range(0, len(messageDictionary["board"]["grid"])):
+                    if (messageDictionary["board"]["grid"][index] > (messageDictionary["board"]["columnCount"] * messageDictionary["board"]["rowCount"])):
+                        outputDictionary["gameStatus"] = "error: grid elements must be LE gridLength"
 
 
 

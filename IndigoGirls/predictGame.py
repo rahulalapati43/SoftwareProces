@@ -45,6 +45,7 @@ def predictGame(messageDictionary):
         outputDictionary["gameStatus"] = "error: invalid grid length"
 
 
+
     return outputDictionary
 
 

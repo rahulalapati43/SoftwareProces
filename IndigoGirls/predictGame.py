@@ -62,8 +62,6 @@ def predictGame(messageDictionary):
                         outputDictionary["gameStatus"] = "error: grid elements must be LE gridLength"
 
 
-
-
     return outputDictionary
 
 

@@ -227,3 +227,18 @@ class predictGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: grid elements must be LE gridLength"
         outputDictionary = predictGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test300_060_shouldValidateatleast2GridElementsGT0(self):
+        inputDictionary = {}
+        inputDictionary["op"] = "predict"
+        inputDictionary["direction"] = "LEft"
+        inputDictionary["moves"] = 1
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 2
+        boardDictionary["rowCount"] = 2
+        boardDictionary["grid"] = [0, 0, 0, 1]
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: No fewer than 2 grid elements must be GT 0"
+        outputDictionary = predictGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

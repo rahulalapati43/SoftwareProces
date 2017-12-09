@@ -61,6 +61,14 @@ def predictGame(messageDictionary):
                     if (messageDictionary["board"]["grid"][index] > (messageDictionary["board"]["columnCount"] * messageDictionary["board"]["rowCount"])):
                         outputDictionary["gameStatus"] = "error: grid elements must be LE gridLength"
 
+                if (outputDictionary["gameStatus"] != "error: grid elements must be LE gridLength"):
+                    countGT0 = 0
+                    for index in range(0, len(messageDictionary["board"]["grid"])):
+                        if (messageDictionary["board"]["grid"][index] > 0):
+                            countGT0 = countGT0 + 1
+
+                    if (countGT0 < 2):
+                        outputDictionary["gameStatus"] = "error: No fewer than 2 grid elements must be GT 0"
 
     return outputDictionary
 

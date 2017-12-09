@@ -76,12 +76,14 @@ def predictGame(messageDictionary):
 
         inputDictionary = {}
         resultDictionary = {}
+        predictDictionary = {}
 
         if (messageDictionary["moves"] == 1):
             resultDictionary = swipeGame(messageDictionary)
-            outputDictionary["highScore"] = resultDictionary["score"]
-            outputDictionary["lowScore"] = resultDictionary["score"]
-            outputDictionary["averageScore"] = resultDictionary["score"]
+            predictDictionary["highScore"] = resultDictionary["score"]
+            predictDictionary["lowScore"] = resultDictionary["score"]
+            predictDictionary["averageScore"] = resultDictionary["score"]
+            outputDictionary["prediction"] = predictDictionary
             outputDictionary["gameStatus"] = "underway"
 
     return outputDictionary

@@ -89,123 +89,127 @@ def predictGame(messageDictionary):
         elif (messageDictionary["moves"] > 1):
             outputList = []
             scoresList = []
-            avgScoresList = []
             start = 0
-            highScore = 0
-            lowScore = 0
-            averageScore = 0
+            weightScore = 0
+            sumScore = 0
 
-            for move in range(1,messageDictionary["moves"] + 1):
-                if (move == 1):
-                    resultDictionary = swipeGame(messageDictionary)
-                    if (resultDictionary["gameStatus"] == "underway"):
-                        firstScore = resultDictionary["score"]
-                    else:
-                        return resultDictionary
-
-                    outputList.append(resultDictionary)
-                    outputListDictionary[move] = outputList
-                    outputList = []
-                else:
-                    end = len(outputListDictionary[move - 1])
-                    weightScore = 0
-                    for index in range(start,end):
-                        resultDictionary = outputListDictionary[move-1][index]
+            try:
+                for move in range(1,messageDictionary["moves"] + 1):
+                    if (move == 1):
+                        resultDictionary = swipeGame(messageDictionary)
                         if (resultDictionary["gameStatus"] == "underway"):
-                            inputDictionary["op"] = "predict"
-                            inputDictionary["board"] = resultDictionary["board"]
+                            firstScore = resultDictionary["score"]
+                            resultDictionary["score"] = 0
+                        else:
+                            return resultDictionary
 
-                            for element in range(0,len(inputDictionary["board"]["grid"])):
-                                if (inputDictionary["board"]["grid"][element] == 0):
-                                    sumScore = 0
-                                    inputDictionary["board"]["grid"][element] = 1
-                                    inputDictionary["direction"] = "left"
-                                    leftDictionary = swipeGame(inputDictionary)
-                                    inputDictionary["direction"] = "right"
-                                    rightDictionary = swipeGame(inputDictionary)
-                                    inputDictionary["direction"] = "up"
-                                    upDictionary = swipeGame(inputDictionary)
-                                    inputDictionary["direction"] = "down"
-                                    downDictionary = swipeGame(inputDictionary)
+                        outputList.append(resultDictionary)
+                        outputListDictionary[move] = outputList
+                        outputList = []
+                    else:
+                        end = len(outputListDictionary[move - 1])
+                        scoresList = []
+                        for index in range(start,end):
+                            resultDictionary = outputListDictionary[move-1][index]
+                            if (resultDictionary["gameStatus"] == "underway"):
+                                inputDictionary["op"] = "predict"
+                                inputDictionary["board"] = resultDictionary["board"]
+                                inputDictionary["score"] = resultDictionary["score"]
 
-                                    outputList.append(leftDictionary)
-                                    outputList.append(rightDictionary)
-                                    outputList.append(upDictionary)
-                                    outputList.append(downDictionary)
+                                for element in range(0,len(inputDictionary["board"]["grid"])):
+                                    if (inputDictionary["board"]["grid"][element] == 0):
+                                        inputDictionary["board"]["grid"][element] = 1
+                                        inputDictionary["direction"] = "left"
+                                        leftDictionary = swipeGame(inputDictionary)
+                                        inputDictionary["direction"] = "right"
+                                        rightDictionary = swipeGame(inputDictionary)
+                                        inputDictionary["direction"] = "up"
+                                        upDictionary = swipeGame(inputDictionary)
+                                        inputDictionary["direction"] = "down"
+                                        downDictionary = swipeGame(inputDictionary)
 
-                                    if (leftDictionary["gameStatus"] == "underway"):
-                                        sumScore = sumScore + leftDictionary["score"]
-                                        scoresList.append(leftDictionary["score"])
+                                        if (leftDictionary["gameStatus"] == "underway"):
+                                            sumScore = sumScore + (3 * leftDictionary["score"])
+                                            weightScore = weightScore + 3
+                                            leftDictionary["score"] = leftDictionary["score"] + inputDictionary["score"]
+                                            scoresList.append(leftDictionary["score"])
 
-                                    if (rightDictionary["gameStatus"] == "underway"):
-                                        sumScore = sumScore + rightDictionary["score"]
-                                        scoresList.append(rightDictionary["score"])
+                                        if (rightDictionary["gameStatus"] == "underway"):
+                                            sumScore = sumScore + (3 * rightDictionary["score"])
+                                            weightScore = weightScore + 3
+                                            rightDictionary["score"] = rightDictionary["score"] + inputDictionary["score"]
+                                            scoresList.append(rightDictionary["score"])
 
-                                    if (upDictionary["gameStatus"] == "underway"):
-                                        sumScore = sumScore + upDictionary["score"]
-                                        scoresList.append(upDictionary["score"])
+                                        if (upDictionary["gameStatus"] == "underway"):
+                                            sumScore = sumScore + (3 * upDictionary["score"])
+                                            weightScore = weightScore + 3
+                                            upDictionary["score"] = upDictionary["score"] + inputDictionary["score"]
+                                            scoresList.append(upDictionary["score"])
 
-                                    if (downDictionary["gameStatus"] == "underway"):
-                                        sumScore = sumScore + downDictionary["score"]
-                                        scoresList.append(downDictionary["score"])
+                                        if (downDictionary["gameStatus"] == "underway"):
+                                            sumScore = sumScore + (3 * downDictionary["score"])
+                                            weightScore = weightScore + 3
+                                            downDictionary["score"] = downDictionary["score"] + inputDictionary["score"]
+                                            scoresList.append(downDictionary["score"])
 
-                                    avgScore = 3 * (sumScore/4)
-                                    weightScore = weightScore + 3
+                                        outputList.append(leftDictionary)
+                                        outputList.append(rightDictionary)
+                                        outputList.append(upDictionary)
+                                        outputList.append(downDictionary)
 
-                                    avgScoresList.append(avgScore)
+                                        inputDictionary["board"]["grid"][element] = 2
+                                        inputDictionary["direction"] = "left"
+                                        leftDictionary = swipeGame(inputDictionary)
+                                        inputDictionary["direction"] = "right"
+                                        rightDictionary = swipeGame(inputDictionary)
+                                        inputDictionary["direction"] = "up"
+                                        upDictionary = swipeGame(inputDictionary)
+                                        inputDictionary["direction"] = "down"
+                                        downDictionary = swipeGame(inputDictionary)
 
-                                    sumScore = 0
-                                    inputDictionary["board"]["grid"][element] = 2
-                                    inputDictionary["direction"] = "left"
-                                    leftDictionary = swipeGame(inputDictionary)
-                                    inputDictionary["direction"] = "right"
-                                    rightDictionary = swipeGame(inputDictionary)
-                                    inputDictionary["direction"] = "up"
-                                    upDictionary = swipeGame(inputDictionary)
-                                    inputDictionary["direction"] = "down"
-                                    downDictionary = swipeGame(inputDictionary)
+                                        if (leftDictionary["gameStatus"] == "underway"):
+                                            sumScore = sumScore + (1 * leftDictionary["score"])
+                                            weightScore = weightScore + 1
+                                            leftDictionary["score"] = leftDictionary["score"] + inputDictionary["score"]
+                                            scoresList.append(leftDictionary["score"])
 
-                                    outputList.append(leftDictionary)
-                                    outputList.append(rightDictionary)
-                                    outputList.append(upDictionary)
-                                    outputList.append(downDictionary)
+                                        if (rightDictionary["gameStatus"] == "underway"):
+                                            sumScore = sumScore + (1 * rightDictionary["score"])
+                                            weightScore = weightScore + 1
+                                            rightDictionary["score"] = rightDictionary["score"] + inputDictionary["score"]
+                                            scoresList.append(rightDictionary["score"])
 
-                                    if (leftDictionary["gameStatus"] == "underway"):
-                                        sumScore = sumScore + leftDictionary["score"]
-                                        scoresList.append(leftDictionary["score"])
+                                        if (upDictionary["gameStatus"] == "underway"):
+                                            sumScore = sumScore + (1 * upDictionary["score"])
+                                            weightScore = weightScore + 1
+                                            upDictionary["score"] = upDictionary["score"] +  inputDictionary["score"]
+                                            scoresList.append(upDictionary["score"])
 
-                                    if (rightDictionary["gameStatus"] == "underway"):
-                                        sumScore = sumScore + rightDictionary["score"]
-                                        scoresList.append(rightDictionary["score"])
+                                        if (downDictionary["gameStatus"] == "underway"):
+                                            sumScore = sumScore + (1 * downDictionary["score"])
+                                            weightScore = weightScore + 1
+                                            downDictionary["score"] = downDictionary["score"] + inputDictionary["score"]
+                                            scoresList.append(downDictionary["score"])
 
-                                    if (upDictionary["gameStatus"] == "underway"):
-                                        sumScore = sumScore + upDictionary["score"]
-                                        scoresList.append(upDictionary["score"])
+                                        outputList.append(leftDictionary)
+                                        outputList.append(rightDictionary)
+                                        outputList.append(upDictionary)
+                                        outputList.append(downDictionary)
 
-                                    if (downDictionary["gameStatus"] == "underway"):
-                                        sumScore = sumScore + downDictionary["score"]
-                                        scoresList.append(downDictionary["score"])
+                                        inputDictionary["board"]["grid"][element] = 0
 
-                                    avgScore = 1 * (sumScore / 4)
-                                    weightScore = weightScore + 1
+                        outputListDictionary[move] = outputList
+                        outputList = []
 
-                                    avgScoresList.append(avgScore)
+                predictDictionary["highScore"] = firstScore + max(scoresList)
+                predictDictionary["lowScore"] = firstScore + min(scoresList)
+                averageScore = int(round(float(sumScore)/float(weightScore)))
+                predictDictionary["averageScore"] = firstScore + averageScore
+                outputDictionary["prediction"] = predictDictionary
+                outputDictionary["gameStatus"] = "underway"
 
-                                    inputDictionary["board"]["grid"][element] = 0
-
-                    outputListDictionary[move] = outputList
-                    outputList = []
-                    highScore = highScore + max(scoresList)
-                    lowScore = lowScore + min(scoresList)
-                    scoresList = []
-                    averageScore = averageScore + int(round(float(sum(avgScoresList))/float(weightScore)))
-                    avgScoresList = []
-
-            predictDictionary["highScore"] = firstScore + highScore
-            predictDictionary["lowScore"] = firstScore + lowScore
-            predictDictionary["averageScore"] = firstScore + averageScore
-            outputDictionary["prediction"] = predictDictionary
-            outputDictionary["gameStatus"] = "underway"
+            except:
+                outputDictionary["gameStatus"] = "error: an unexpected event occured"
 
     return outputDictionary
 

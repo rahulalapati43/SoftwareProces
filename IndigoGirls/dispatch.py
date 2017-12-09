@@ -3,6 +3,7 @@ from initializeGame import *
 from swipeGame import *
 from recommendGame import *
 from statusGame import *
+from predictGame import *
 
 def dispatch(messageJson=None):
     """
@@ -53,6 +54,8 @@ def dispatch(messageJson=None):
         resultDictionary = recommendGame(messageDictionary)
     elif (messageDictionary[u"op"] == u"status"):
         resultDictionary = statusGame(messageDictionary)
+    elif (messageDictionary[u"op"] == u"predict"):
+        resultDictionary = predictGame(messageDictionary)
     else:
         resultDictionary = buildErrorString('op is invalid')
 

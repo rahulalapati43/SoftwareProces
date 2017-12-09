@@ -1,3 +1,5 @@
+from IndigoGirls.swipeGame import swipeGame
+
 def predictGame(messageDictionary):
 
     outputDictionary = {}
@@ -69,6 +71,18 @@ def predictGame(messageDictionary):
 
                     if (countGT0 < 2):
                         outputDictionary["gameStatus"] = "error: No fewer than 2 grid elements must be GT 0"
+
+    if (outputDictionary["gameStatus"] == "underway"):
+
+        inputDictionary = {}
+        resultDictionary = {}
+
+        if (messageDictionary["moves"] == 1):
+            resultDictionary = swipeGame(messageDictionary)
+            outputDictionary["highScore"] = resultDictionary["score"]
+            outputDictionary["lowScore"] = resultDictionary["score"]
+            outputDictionary["averageScore"] = resultDictionary["score"]
+            outputDictionary["gameStatus"] = "underway"
 
     return outputDictionary
 

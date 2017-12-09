@@ -44,6 +44,12 @@ def predictGame(messageDictionary):
     elif (len(messageDictionary["board"]["grid"]) != (messageDictionary["board"]["columnCount"] * messageDictionary["board"]["rowCount"])):
         outputDictionary["gameStatus"] = "error: invalid grid length"
 
+    elif (len(messageDictionary["board"]["grid"]) == (messageDictionary["board"]["columnCount"] * messageDictionary["board"]["rowCount"])):
+        for index in range(0, len(messageDictionary["board"]["grid"])):
+            if (isinstance(messageDictionary["board"]["grid"][index],int) == False):
+                outputDictionary["gameStatus"] = "error: invalid grid elements"
+
+
 
 
     return outputDictionary

@@ -153,3 +153,17 @@ class predictGameTest(TestCase):
         resultDictionary["gameStatus"] = "error: rowCount is out of bounds"
         outputDictionary = predictGame(inputDictionary)
         self.assertEquals(resultDictionary, outputDictionary)
+
+    def test300_010_shouldValidatemissingGrid(self):
+        inputDictionary = {}
+        inputDictionary["op"] = "predict"
+        inputDictionary["direction"] = "LEft"
+        inputDictionary["moves"] = 1
+        boardDictionary = {}
+        boardDictionary["columnCount"] = 100
+        boardDictionary["rowCount"] = 100
+        inputDictionary["board"] = boardDictionary
+        resultDictionary = {}
+        resultDictionary["gameStatus"] = "error: missing grid"
+        outputDictionary = predictGame(inputDictionary)
+        self.assertEquals(resultDictionary, outputDictionary)

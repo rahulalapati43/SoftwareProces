@@ -41,6 +41,9 @@ def predictGame(messageDictionary):
     elif "grid" not in messageDictionary["board"]:
         outputDictionary["gameStatus"] = "error: missing grid"
 
+    elif (len(messageDictionary["board"]["grid"]) != (messageDictionary["board"]["columnCount"] * messageDictionary["board"]["rowCount"])):
+        outputDictionary["gameStatus"] = "error: invalid grid length"
+
 
     return outputDictionary
 

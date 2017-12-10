@@ -1,18 +1,32 @@
 from IndigoGirls.swipeGame import swipeGame
 
 def predictGame(messageDictionary):
+    """
+                     predictGame is a function and is invoked in dispatch when the operation to be performed is predict
+                     high score, low score & average score for lookahead moves.
+                :param messageDictionary: Is a dictionary which consists the following name value pairs: operation (op), direction, moves,
+                                         board dictionary which consists of row count (rowCount), column count (columnCount) and grid.
+                                         All the params are mandatory.
+                :return:                 A dictionary which consists of the following name value pairs: prediction, game status.
+                                         The prediction consists of another dictionary which consists of 3 name value pairs:
+                                         highScore, lowScore & averageScore.
+                """
 
+    #output dictionary is returned to dispatch after the calculations are done
     outputDictionary = {}
     outputDictionary["gameStatus"] = "underway"
 
+    #call to validatePredict to validate the input dictionary
     outputDictionary = validatePredict(messageDictionary, outputDictionary)
 
+    #if every element of the input dictionary are validated
     if (outputDictionary["gameStatus"] == "underway"):
 
         inputDictionary = {}
         predictDictionary = {}
         outputListDictionary = {}
 
+        #if number of lookahead moves is 1
         if (messageDictionary["moves"] == 1):
             resultDictionary = swipeGame(messageDictionary)
             predictDictionary["highScore"] = resultDictionary["score"]
@@ -21,6 +35,7 @@ def predictGame(messageDictionary):
             outputDictionary["prediction"] = predictDictionary
             outputDictionary["gameStatus"] = "underway"
 
+        #if number of lookahead moves is greater than 1
         elif (messageDictionary["moves"] > 1):
             outputList = []
             scoresList = []
@@ -143,12 +158,13 @@ def predictGame(messageDictionary):
                 outputDictionary["prediction"] = predictDictionary
                 outputDictionary["gameStatus"] = "underway"
 
+            #to handle all kind of exceptions
             except:
                 outputDictionary["gameStatus"] = "error: an unexpected event occured"
 
     return outputDictionary
 
-
+#method to validate input dictionary for Predict
 def validatePredict(messageDictionary, outputDictionary):
     if "direction" not in messageDictionary.keys():
         outputDictionary["gameStatus"] = "error: missing direction"
@@ -172,7 +188,7 @@ def validatePredict(messageDictionary, outputDictionary):
 
     return outputDictionary
 
-
+#method to validate board
 def validateBoard(messageDictionary, outputDictionary):
 
     if "board" not in messageDictionary.keys():

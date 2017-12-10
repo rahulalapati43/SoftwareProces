@@ -9,7 +9,7 @@ def predictGame(messageDictionary):
                                          All the params are mandatory.
                 :return:                 A dictionary which consists of the following name value pairs: prediction, game status.
                                          The prediction consists of another dictionary which consists of 3 name value pairs:
-                                         highScore, lowScore & averageScore.
+                                         highScore, lowScore and averageScore.
                 """
 
     #output dictionary is returned to dispatch after the calculations are done
